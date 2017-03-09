@@ -5,7 +5,7 @@ function HomeController($rootScope, $location){
     var self = this;
     this.$rootScope = $rootScope;
     this.$location = $location;
-    this.prevScrollY = 0;
+    this.prevScrollY =  0;
     this.myInterval = 4000;
     this.myTestiInterval = 3000;
     this.showMenu = this.showDownload = false;
