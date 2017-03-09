@@ -1,0 +1,89 @@
+<style type="text/css">
+.in-view .top-header, .in-view .search-options .radio-inline {
+	-webkit-animation-name: header; /* Chrome, Safari, Opera */
+	-webkit-animation-duration: 2s; /* Chrome, Safari, Opera */
+	animation-name: header;
+	animation-duration: 2s;
+}
+
+.in-view .content-inner-title {
+	-webkit-animation-name: delay; /* Chrome, Safari, Opera */
+	-webkit-animation-duration: 2s; /* Chrome, Safari, Opera */
+	animation-name: delay;
+	animation-duration: 2s;
+}
+
+@
+keyframes header {from { opacity:0;
+	margin-left: 240px;
+	position: absolute;
+}
+
+to {
+	opacity: 1;
+	margin-left: 0px;
+	position: relative;
+}
+
+}
+@
+keyframes delay {from { opacity:0;
+	margin-top: -100px;
+	position: absolute;
+}
+
+to {
+	opacity: 1;
+	margin-top: 0px;
+	position: relative;
+}
+
+}
+.search-category input, .search-category select {
+	color: darkgrey;
+}
+</style>
+<div class="col-lg-12 title top-header">
+	<span>Find Your</span> <span> Better-Half Here!</span>
+</div>
+<div>
+	<img src="images/hd-border.png">
+</div>
+<div class="marriage-quote content-inner-title">
+	The Couples That Are <i><b>'Meant To Be'</b></i> Are The Ones Who Go
+	Through Everything That's Designed To Tear Them Apart And Come Out Even
+	Stronger.
+</div>
+<div class="search-options">
+	<label class="radio-inline"><img src="images/groom.png"><input
+		type="radio" id="groom" name="pair" value="groom"><br>Groom</label>
+	<label class="radio-inline"><img src="images/bride.png"><input
+		type="radio" id="bride" name="pair" value="bride"><br>Bride</label>
+
+	<div class="search-category col-lg-12 col-md-12 col-sm-12 col-xs-12">
+
+		<!--Age is not required->
+	<!--<select>
+			<option value="18-24">18-24</option>
+			<option value="25-31">25-31</option>
+			<option value="32-38">32-38</option>
+			<option value="<38"> <38</option>
+		</select>-->
+		<!--Already commented-->
+		<!--  <select ng-model="hc.betrHalfAge">
+      <option value="Select your Choice">Select your Choice</option>
+      <option value="Hindu">Hindu</option>
+      <option value="Muslim">Muslim</option>
+      <option value="Christian">Christian</option>
+      <option value="Bhudhism">Bhudhism</option>              
+      <option value="Others">Others</option>
+    </select> -->
+
+		<input type="text" placeholder="Mother-Tongue*" required> <input
+			type="text" placeholder="Religion*" required> <input
+			type="text" placeholder="Community*" required><br> <br>
+		<button type="submit" class="btn" data-toggle="modal"
+			data-target="#login-modal">Search</button>
+
+	</div>
+</div>

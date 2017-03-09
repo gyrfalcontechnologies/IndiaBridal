@@ -1,0 +1,46 @@
+[{
+	"memberID": "IBM10000004",
+	"currPage": "uFamilyInfo",
+	"userData": {
+		"fatherStatus": {
+			"isOthers": "false",
+			"value": "ALive"
+		},
+		"motherStatus": {
+			"isOthers": "false",
+			"value": "ALive"
+		},
+		"country": {
+			"isOthers": "false",
+			"value": "CNY10001"
+		},
+		"state": {
+			"isOthers": "false",
+			"value": "STY10001"
+		},
+		"city": {
+			"isOthers": "false",
+			"value": "CTY10001"
+		},
+		"nativePlace": {
+			"isOthers": "false",
+			"value": "Chittor"
+		},
+		"noOfSiblings": {
+			"isOthers": "false",
+			"value": "1"
+		},
+		"familyTypeID": {
+			"isOthers": "false",
+			"value": "FTY10001"
+		},
+		"familyValue": {
+			"isOthers": "false",
+			"value": "Moderate"
+		},
+		"familyStatus": {
+			"isOthers": "false",
+			"value": "Upper Middle Class"
+		}
+	}
+}]

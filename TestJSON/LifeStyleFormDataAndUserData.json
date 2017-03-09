@@ -1,0 +1,33 @@
+[{
+	"isnavPageDataAvailable": "true",
+	"isAuthenticated": "true",
+	"status": "success",
+	"navPage": "lifeStyle",
+	"errorMsg": "success",
+	"navPageData": {
+		"drinker": {
+			"userValues": {
+				"value": "",
+				"key": ""
+			}
+		},
+		"foodType": {
+			"defaultValues": {
+				"FOT10002": "Non Vegeterian",
+				"FOT10003": "Eggeterian",
+				"FOT10001": "Vegeterian"
+			},
+			"userValues": {
+				"value": "",
+				"key": ""
+			}
+		},
+		"smoker": {
+			"userValues": {
+				"value": "",
+				"key": ""
+			}
+		}
+	},
+	"memberID": "IBM10000003"
+}]

@@ -1,0 +1,232 @@
+<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 nav-info">
+	Home >&nbsp; {{src.$rootScope.activeNav}}</div>
+<div class="profile-content">
+	<div class="col-lg-3 col-md-3 col-sm-3 col-xs-3">
+		<div class="profile-activity col-lg-12 col-md-12 col-sm-12 col-xs-12">
+			<div class="prof-act-header">
+				<span><b>Activity</b></span> <span><img
+					src="images/shortList.png"></span>
+			</div>
+			<div class="activity-tree">
+				<!-- <div class="tree-list" ng-repeat="val in src.activityList"><a href="">{{val.name}} <label>+</label></a></div> -->
+				<uib-accordion close-others=false> <uib-accordion-group
+					is-open=false ng-if="val.display"
+					ng-repeat="val in src.activityList"> <uib-accordion-heading>
+				<div class="tree-list" id="{{val.name}}"
+					ng-click="val.expand=!val.expand;src.pointMe($event, val.expand);">
+					{{val.name}} <img src="images/plus.png" ng-if="!val.expand">
+					<img src="images/minus.png" ng-if="val.expand">
+				</div>
+				</uib-accordion-heading>
+				<div class="filter-options" ng-repeat="opt in val.options"
+					ng-click="src.scrollTop()">
+					<span ng-if="val.name==='Marital Status'"> <input
+						type="radio" name="Category1" ng-model="src.married"
+						value={{opt.value}}>&emsp;{{opt.name}}
+					</span> <span ng-if="val.name=== 'Religion'"> <input type="radio"
+						name="Category2" ng-model="src.relgn" value={{opt.value}}>&emsp;{{opt.name}}
+					</span> <span ng-if="val.name=== 'Mother Tongue'"> <input
+						type="radio" name="Category3" ng-model="src.mtnge"
+						value={{opt.value}}>&emsp;{{opt.name}}
+					</span> <span ng-if="val.name=== 'Smoking'"> <input type="radio"
+						name="Category4" ng-model="src.smkng" value={{opt.value}}>&emsp;{{opt.name}}
+					</span> <span ng-if="val.name=== 'Drinking'"> <input type="radio"
+						name="Category5" ng-model="src.drnkng" value={{opt.value}}>&emsp;{{opt.name}}
+					</span>
+				</div>
+				</uib-accordion-group> </uib-accordion>
+			</div>
+		</div>
+	</div>
+	<div ng-if="!src.$rootScope.isPrefUpdated"
+		class="not-found col-lg-9 col-md-9 col-sm-9 col-xs-9">
+		Please <a href="#profile/edit">Update</a> All Your Details To View
+		Members
+	</div>
+	<div ng-if="src.$rootScope.isPrefUpdated"
+		class="col-lg-9 col-md-9 col-sm-9 col-xs-9" style="margin-top: 15px;">
+		<h2 class="search-res-head">Search Results -
+			({{src.currentMemberProfileInfo["Member_count"]}}) Profiles Found</h2>
+		<div class="search-res-opt col-lg-12 col-md-12 col-sm-12 col-xs-12">
+			<div class="connectAll col-lg-6 col-md-6 col-sm-6 col-xs-6">
+				<!-- <input type="checkbox" checked="false">Connect All-->
+			</div>
+			<div class="save-opt col-lg-6 col-md-6 col-sm-6 col-xs-6">
+				<!--Save this result &emsp; <span>|</span> -->
+				&emsp; Sort &emsp; <span>: &emsp; <select
+					ng-change="src.sortArray(src.sortSelected)"
+					ng-model="src.sortSelected"
+					style="font-weight: normal; font-size: 12px;">
+						<option value="">Default</option>
+						<option value="name">A-Z</option>
+						<option value="age">Age</option>
+						<option value="reverse">Height</option>
+				</select>
+				</span>
+			</div>
+			<div class="result-view col-lg-12 col-md-12 col-sm-12 col-xs-12"
+				ng-if="!src.resLoaded">
+				<span><br> <br> <br> <span
+					class="glyphicon glyphicon-repeat glyphicon-repeat-animate"></span><br>
+					<br> Fetching the latest data...</span>
+			</div>
+			<div ng-init="src.sortSelectedReverse=true" ng-if="src.resLoaded"
+				class="result-view col-lg-12 col-md-12 col-sm-12 col-xs-12"
+				ng-class="src.updateCount(src.memRes)">
+				<div
+					ng-if="src.currentMemberProfileInfo['member_count']===0 || src.currentMemberProfileInfo['member_count']==='0'">
+					Sorry!.. No Matching Profiles Found</div>
+				<div ng-init="member.showMember=true;" ng-show="member.showMember"
+					ng-if="id!=='member_count'"
+					ng-repeat="(id,member) in src.memRes = (src.currentMemberProfileInfo | myFilter: 'married' : src.married | myFilter: 'religion' : src.relgn | myFilter: 'motherTongue' : src.mtnge | myFilter: 'lifestle.smoker' : src.smkng  | myFilter: 'lifestle.drinker' : src.drnkng | orderObjectBy : src.sortSelected : src.sortSelectedReverse)">
+					<table class="col-lg-12 col-md-12 col-sm-12 col-xs-12 table-search"
+						ng-init="member.showConnect=false;member.showHoro=false;member.showSMS=false;member.showNumber=false">
+						<tr>
+							<td colspan=2>
+								<!-- <input type="checkbox" checked="false"> -->
+							</td>
+							<td style="text-align: right; padding-right: 14px;"><label
+								ng-if="false"
+								ng-click="member.showMember=src.removeMemberFromList()"
+								title="Remove Member">X</label></td>
+						</tr>
+						<tr>
+							<td class="profile"
+								ng-click="src.setCurrentMember(member.memberID)"><img
+								class="prof-upload-image" ng-if="member.img.length>0"
+								ng-src="{{member.img[member.imgIdx].url}}"> <img
+								ng-if="member.img.length===0" src="images/female-user.png">
+								<h4>{{member.name}}</h4> <!-- User : {{member.createdby}}  --></td>
+							<td colspan=2>
+								<table
+									class="col-lg-12 col-md-12 col-sm-12 col-xs-12 inner-table">
+									<tr>
+										<td><b>Age / Height</b></td>
+										<td><b>&emsp;:&emsp;</b>{{member.age}} /
+											{{member.height}}</td>
+										<td style="text-align: right; padding-right: 14px;"><img
+											src="images/mail-her.png" title="Send SMS"
+											ng-click="src.closeSMSPrevious(member);member.sendSMS=!member.sendSMS;">&emsp;
+											<!--<img src="images/chat.png" title="Chat with user" ng-click="src.showPremiumFeature()">-->
+											<div ng-show="member.sendSMS" class="show-connect show-sms">
+												<b>Send SMS To : </b> &nbsp;{{member.name}}
+												({{member.memberID}}) <br> <br>
+												<textarea maxlength="1000">We Are Interested In Your Profile. Awaiting For Your Response.
+												</textarea>
+												<br>
+												<button
+													ng-click="member.sendSMS=!member.sendSMS;src.showPremiumFeature()">Send</button>
+												&emsp;
+												<button ng-click="member.sendSMS=!member.sendSMS;">Close</button>
+											</div> &emsp; <img src="images/heart.png" title="Add to Shortlists"
+											ng-click="src.showPremiumFeature()"></td>
+									</tr>
+									<tr>
+										<td><b>Religion </b></td>
+										<td colspan=2><b>&emsp;:&emsp;</b>{{member.religion}}</td>
+									</tr>
+									<tr>
+										<td><b>Community </b></td>
+										<td colspan=2><b>&emsp;:&emsp;</b>{{member.community}}</td>
+									</tr>
+									<tr>
+										<td><b>Education </b></td>
+										<td colspan=2><b>&emsp;:&emsp;</b>{{member.education}}</td>
+									</tr>
+									<tr>
+										<td><b>Profession </b></td>
+										<td colspan=2><b>&emsp;:&emsp;</b>{{member.work}}</td>
+									</tr>
+								</table>
+							</td>
+						</tr>
+						<tr>
+							<td colspan="2" class="serch-contact"><img
+								title="View Number" src="images/call-sms.png"
+								ng-click="src.closePreviousNumber(member);member.showNumber=!member.showNumber;">&emsp;
+								<img title="View or Download Horoscope"
+								src="images/srch-horo.png"
+								ng-click="src.closePreviousHoro(member);member.showHoro=!member.showHoro;">
+								<div ng-show="member.showNumber" class="show-connect show-num">
+									<b>MEMBER : </b> &nbsp;{{member.name}} ({{member.memberID}}) <br>
+									<br> <b>PHONE :</b> &nbsp; +91-XXX-XXX-XXXX<br> <br>
+									<button ng-click="member.showNumber=!member.showNumber;">Close</button>
+								</div>
+								<div ng-show="member.showHoro" class="show-connect show-num">
+									{{member.name}} ({{member.memberID}}) &nbsp; <b>HoroScope!</b><br>
+									<br>
+									<button
+										ng-click="member.showHoro=!member.showHoro;src.showPremiumFeature()">Download</button>
+									&emsp;
+									<button ng-click="member.showHoro=!member.showHoro;">Close</button>
+								</div></td>
+							<td class="serch-button">
+								<button title="View User Profile"
+									ng-click="src.setCurrentMember(member.memberID)">View
+									Profile</button>&emsp;
+								<button ng-init="cnId='connect'" id="{{cnId+$index}}"
+									ng-click="src.closePrevious(member);member.showConnect=!member.showConnect;"
+									title="Send Request">Connect</button>
+								<div ng-show="member.showConnect" class="show-connect">
+									<b>Send Request To : </b> &nbsp;{{member.name}}
+									({{member.memberID}}) <br> <br>
+									<textarea maxlength="1000" style="margin: -10px">We are Interested in Your Profile. Awaiting For Your Response.
+									</textarea>
+									<br>
+									<button
+										ng-click="member.showConnect=!member.showConnect;src.showPremiumFeature()">Send</button>
+									&emsp;
+									<button ng-click="member.showConnect=!member.showConnect;">Close</button>
+								</div>
+							</td>
+						</tr>
+					</table>
+				</div>
+				<div>
+					<button ng-if="!src.enableLoader && !src.enableNoMoreText"
+						class="btn load-more" ng-click="src.getMoreMembers()">LoadMore</button>
+					<span ng-if="src.enableLoader"
+						style="font-size: 30px; margin: 10px;"
+						class="glyphicon glyphicon-repeat glyphicon-repeat-animate"></span>
+					<span ng-if="src.enableNoMoreText"
+						style="font-size: 13px; color: orange; margin-top: 65px;">
+					</span>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+<div ng-include src="'views/footer.html'"></div>
+<style type="text/css">
+.glyphicon-repeat-animate {
+	-webkit-animation: spin .7s infinite linear;
+	font-size: 45px;
+	color: orange;
+	margin-top: 50px;
+	background: rgba(255, 165, 0, 0.24);
+	border-radius: 137px;
+}
+
+@
+-webkit-keyframes spin {from { -webkit-transform:rotate(0deg);
+	
+}
+
+to {
+	-webkit-transform: rotate(360deg);
+}
+
+}
+.not-found {
+	padding: 48px;
+	color: orange;
+	margin-top: 100px;
+	font-size: 15px;
+	font-weight: normal;
+}
+
+.load-more {
+	background: linear-gradient(orange, #ffbe46);
+	color: #fff;
+}
+</style>

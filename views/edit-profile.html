@@ -1,0 +1,1190 @@
+<style type="text/css">
+.select-error {
+	color: red;
+	font-size: 10px;
+}
+
+.no-wrap {
+	white-space: nowrap;
+}
+
+.user-value {
+	border-color: #B0FF80 !important;
+	background: rgba(255, 196, 88, 0.24);
+}
+
+option:disabled {
+	display: none !important;
+}
+
+.others-text {
+	width: 150px !important;
+}
+
+.glyphicon-repeat-animate {
+	-webkit-animation: spin .7s infinite linear;
+	font-size: 45px;
+	color: orange;
+	margin-top: 50px;
+	background: rgba(255, 165, 0, 0.24);
+	border-radius: 137px;
+}
+
+@
+-webkit-keyframes spin {from { -webkit-transform:rotate(0deg);
+	
+}
+
+to {
+	-webkit-transform: rotate(360deg);
+}
+}
+</style>
+<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 nav-info">
+	Home >&nbsp; {{pec.$rootScope.activeNav}}</div>
+<div class="profile-content">
+	<div class="col-lg-2 col-md-2 col-sm-2 col-xs-2">
+		<div class="profile-info">
+			<div class="user-pic">
+				<img ng-if="pec.profilePics.length===0" src="images/user-img.png">
+				<img ng-show="pec.profilePics.length>0" class="prof-upload-image"
+					ng-src="{{pec.profilePics.slice().reverse()[pec.profIndex].url}}">
+			</div>
+			<div ng-init="pec.statusDisabled=true" class="user-info"
+				ng-click="pec.focusInput()">
+				<h4>
+					<b>{{pec.currentUserProfileInfo.name}}</b>
+				</h4>
+				<!--	<input title="Click to Edit" class="status-holder" type="text" ng-disabled="pec.statusDisabled" placeholder="{{pec.currentUserProfileInfo.status}}" value="{{pec.currentUserProfileInfo.status}}">-->
+
+			</div>
+			<div class="profile-percent">
+				<input id="uploading" style="display: none" type="file"
+					accept="image/*" multiple image="images" resize-max-height="120"
+					resize-max-width="120" resize-quality="0.7" />
+				<button ng-disabled="pec.profilePics.length===4"
+					ng-click="pec.triggerFileEvent()">Add Profile Picture</button>
+				<br> <br> <label class="prof-upload-alert"
+					ng-if="pec.profilePics.length===4">* You can upload maximum
+					4 pics</label> <img ng-show="false" ng-if="$index<4"
+					ng-repeat="img in images" ng-src="{{img.url}}"
+					ng-init="pec.insertProfToList(img, $index)" />
+				<div class="profile-pic-list" ng-show="pec.profilePics.length>0">
+					<div ng-if="$index<4"
+						ng-repeat="img in pec.profilePics.slice().reverse()">
+						<img style="width: 132px; height: 104px;"
+							ng-class="{'img-sel' : ($index===pec.profIndex)}"
+							ng-src="{{img.url}}" ng-click="pec.profIndex=$index" /> <label
+							ng-click="pec.removeGalleryImage($index)">X</label>
+					</div>
+				</div>
+				<button style="margin: 10px 0 -10px 0;"
+					ng-show="pec.profilePics.length>0 || pec.statusDisabled===false"
+					ng-click="pec.statusDisabled=true;pec.updateUserProfilePic()">Save</button>
+			</div>
+		</div>
+	</div>
+	<div class="col-lg-8 col-md-8 col-sm-8 col-xs-8 prof-edit">
+		<div class="col-lg-12 nav-images">
+			<img ng-if="pec.levels[0].isLevel" src="images/r_info_m_done.png"
+				ng-click="pec.switchToLevel(0)"> <img
+				ng-if="!pec.levels[0].isLevel" src="images/r_info_m_pending.png"
+				ng-click="pec.switchToLevel(0, true)">
+			<div class="img-splitter"
+				ng-class="{'img-spliteer-active' :pec.levels[0].isLevel}">
+				<img ng-if="pec.levels[0].showLevel" src="images/edit-marker.png">
+				<span ng-if="pec.levels[0].showLevel">Basic Info</span>
+			</div>
+			<img ng-if="pec.levels[1].isLevel" src="images/r_info_done3.png"
+				ng-click="pec.switchToLevel(1)"> <img
+				ng-if="!pec.levels[1].isLevel" src="images/r_info_pending3.png"
+				ng-click="pec.switchToLevel(1, true)">
+			<div class="img-splitter"
+				ng-class="{'img-spliteer-active' :pec.levels[1].isLevel}">
+				<img ng-if="pec.levels[1].showLevel" src="images/edit-marker.png">
+				<span ng-if="pec.levels[1].showLevel">Family Info</span>
+			</div>
+			<img ng-if="pec.levels[2].isLevel" src="images/r_info_done4.png"
+				ng-click="pec.switchToLevel(2)"> <img
+				ng-if="!pec.levels[2].isLevel" src="images/r_info_pending4.png"
+				ng-click="pec.switchToLevel(2, true)">
+			<div class="img-splitter"
+				ng-class="{'img-spliteer-active' :pec.levels[2].isLevel}">
+				<img ng-if="pec.levels[2].showLevel" src="images/edit-marker.png">
+				<span ng-if="pec.levels[2].showLevel">Astro Details</span>
+			</div>
+			<img ng-if="pec.levels[3].isLevel" src="images/r_info_done5.png"
+				ng-click="pec.switchToLevel(3)"> <img
+				ng-if="!pec.levels[3].isLevel" src="images/r_info_pending5.png"
+				ng-click="pec.switchToLevel(3, true)">
+			<div class="img-splitter"
+				ng-class="{'img-spliteer-active' :pec.levels[3].isLevel}">
+				<img ng-if="pec.levels[3].showLevel" src="images/edit-marker.png">
+				<span ng-if="pec.levels[3].showLevel" class="fatty">Education
+					& Career</span>
+			</div>
+			<img ng-if="pec.levels[4].isLevel" src="images/r_info_done6.png"
+				ng-click="pec.switchToLevel(4)"> <img
+				ng-if="!pec.levels[4].isLevel" src="images/r_info_pending6.png"
+				ng-click="pec.switchToLevel(4, true)">
+			<div class="img-splitter"
+				ng-class="{'img-spliteer-active' :pec.levels[4].isLevel}">
+				<img ng-if="pec.levels[4].showLevel" src="images/edit-marker.png">
+				<span ng-if="pec.levels[4].showLevel">Life Style
+					</th>
+				</span>
+			</div>
+			<img ng-if="pec.levels[5].isLevel" src="images/r_info_f_done.png"
+				ng-click="pec.switchToLevel(5)"> <img
+				ng-if="!pec.levels[5].isLevel" src="images/r_info_f_pending.png"
+				ng-click="pec.switchToLevel(5, true)">
+			<div class="img-splitter"
+				ng-class="{'img-spliteer-active' :pec.levels[5].isLevel}">
+				<img ng-if="pec.levels[5].showLevel" src="images/edit-marker.png">
+				<span ng-if="pec.levels[5].showLevel" class="fatty">Partner
+					Preference Info</span>
+			</div>
+		</div>
+		<div class="col-lg-12 edit-prof-inner">
+			<form ng-show="pec.levels[0].showLevel" class="basic-info"
+				ng-submit="pec.sendBasicInfoFormData()">
+				<span ng-show="!pec.showBasicForm"><br> <br> <br>
+					<span class="glyphicon glyphicon-repeat glyphicon-repeat-animate"></span><br>
+					<br> Fetching the latest data..</span>
+				<table id="BASIC-INFO" width="100%" ng-show="pec.showBasicForm"
+					class="level1">
+					<tr>
+						<td><label>Profile Created By</label></td>
+						<td><input type="text" name="createdBy"
+							value="{{pec.loggedUserService.basicInfoData.navPageData.createdBy.userValues.value}}"
+							placeholder="Profile created by" disabled /> <input
+							type="hidden" name="createdBy"
+							value="{{pec.loggedUserService.basicInfoData.navPageData.createdBy.userValues.key}}"
+							placeholder="*Profile Created By*" /></td>
+					</tr>
+					<tr>
+						<td><label>Gender</label></td>
+						<td><input name="gender" value="male"
+							ng-checked="pec.loggedUserService.basicInfoData.navPageData.gender.userValues.value==='male'"
+							type="radio" disabled>&nbsp;Male&emsp;&emsp; <input
+							name="gender" value="female"
+							ng-checked="pec.loggedUserService.basicInfoData.navPageData.gender.userValues.value==='female'"
+							type="radio" disabled>&nbsp;Female&emsp;&emsp; <input
+							type="hidden"
+							value="{{pec.loggedUserService.basicInfoData.navPageData.gender.userValues.value}}"
+							name="gender"></td>
+					</tr>
+					<tr>
+						<td><label>Date of Birth</label></td>
+						<td><input type="text"
+							value="{{pec.loggedUserService.basicInfoData.navPageData.dob.userValues.value}}"
+							placeholder="*Date of Birth*" disabled> <input name="dob"
+							type="hidden"
+							value="{{pec.loggedUserService.basicInfoData.navPageData.dob.userValues.value}}">
+						</td>
+					</tr>
+					<tr>
+						<td><label>About Yourself</label></td>
+						<td><textArea pattern="{a-z}" value="100" maxlength="100"
+								type="ng-class="
+								{'user-value' :pec.loggedUserService.basicInfoData.navPageData.description.userValues.value!==
+								'' }" style="height: 75px;"
+								value="{{pec.loggedUserService.basicInfoData.navPageData.description.userValues.value}}"
+								name="description"
+								placeholder="*Let your partner know who you are*   Not more than 100 words "
+								required>{{pec.loggedUserService.basicInfoData.navPageData.description.userValues.value}}</textArea>
+					</tr>
+					<tr>
+						<td><label>Marital Status</label></td>
+						<td>
+							<!-- <select ng-class="{'user-value' :pec.loggedUserService.basicInfoData.navPageData.martialStatus.userValues.value!=='' }" name="maritalStatus" ng-model="pec.maritalStatus"  required>
+							<option ng-repeat="(key, val) in pec.maritalStatusList | orderBy:key" value="{{key}}">{{val}}</option>
+						</select> --> <select
+							ng-class="{'user-value' :pec.loggedUserService.basicInfoData.navPageData.martialStatus.userValues.value!=='' }"
+							name="maritalStatus" ng-model="pec.maritalStatus"
+							ng-options="key as value for (key , value) in pec.maritalStatusList | orderBy:key"
+							required></select> <label class="select-error">{{pec.maritalStatusErr}}</label>
+						</td>
+					</tr>
+					<tr>
+						<td><label>Height (cm)</label></td>
+						<td><input pattern="{3}"
+							ng-class="{'user-value' :pec.loggedUserService.basicInfoData.navPageData.height.userValues.value!=='' }"
+							name="height"
+							value="{{pec.loggedUserService.basicInfoData.navPageData.height.userValues.value}}"
+							type="text" placeholder="*Height*" required></td>
+					</tr>
+					<tr>
+						<td><label>Body Type</label></td>
+						<td><span
+							ng-repeat="(key, val) in pec.loggedUserService.basicInfoData.navPageData.physique.defaultValues">
+								<input
+								ng-class="{'user-value' :pec.loggedUserService.basicInfoData.navPageData.physique.userValues.value!=='' }"
+								ng-checked="pec.loggedUserService.basicInfoData.navPageData.physique.userValues.value===val"
+								type="radio" ng-model="pec.b_type" value="{{key}}"
+								name="physique" required>&nbsp;{{val}}&emsp;&emsp;
+						</span></td>
+					</tr>
+					<tr>
+						<td><label>Body Weight (kg)</label></td>
+						<td><input pattern="{3}"
+							ng-class="{'user-value' :pec.loggedUserService.basicInfoData.navPageData.weight.userValues.value!=='' }"
+							name="weight"
+							value="{{pec.loggedUserService.basicInfoData.navPageData.weight.userValues.value}}"
+							type="text" placeholder="*Body Weight*" required></td>
+					</tr>
+					<tr>
+						<td><label>Skin Tone</label></td>
+						<td><span ng-class="{'no-wrap' :$last}"
+							ng-repeat="(key, val) in pec.loggedUserService.basicInfoData.navPageData.complexion.defaultValues">
+								<input
+								ng-class="{'user-value' :pec.loggedUserService.basicInfoData.navPageData.fullName.userValues.value!=='' }"
+								name="complexion"
+								ng-checked="pec.loggedUserService.basicInfoData.navPageData.complexion.userValues.value===val"
+								type="radio" ng-model="pec.s_tone" value="{{key}}" name="s_tone"
+								required>&nbsp;{{val}}&emsp;&emsp;
+						</span></td>
+					</tr>
+					<tr>
+						<td><label>Any Disability?</label></td>
+						<td><input
+							ng-checked="pec.loggedUserService.basicInfoData.navPageData.isDisabled.userValues.value==='false'"
+							type="radio" value="false" name="isDisabled" required>&nbsp;None&emsp;&emsp;
+							<input
+							ng-checked="pec.loggedUserService.basicInfoData.navPageData.isDisabled.userValues.value==='true'"
+							type="radio" value="true" name="isDisabled" required>&nbsp;Physical
+							Disability&emsp;&emsp;</td>
+					</tr>
+					<tr>
+						<td><label>Religion</label></td>
+						<td>
+							<!-- <select ng-class="{'user-value':pec.loggedUserService.basicInfoData.navPageData.religion.userValues.value!=='' }" ng-change="pec.enableDisableText(pec.uReligion, 'religion-o');pec.religionText=''" name="religion" ng-model="pec.uReligion"  required>
+							<option ng-repeat="(key, val) in pec.religionList | orderBy:key" value="{{key}}">{{val}}</option>
+						</select> --> <select
+							ng-class="{'user-value':pec.loggedUserService.basicInfoData.navPageData.religion.userValues.value!=='' }"
+							ng-change="pec.enableDisableText(pec.uReligion, 'religion-o');pec.religionText=''"
+							name="religion" ng-model="pec.uReligion"
+							ng-options="key as value for (key , value) in pec.religionList | orderBy:key"
+							required></select> <input ng-if="pec.uReligion==='Others'"
+							ng-model="pec.religionText" style="width: 150px !important"
+							id="religion-o" class="others-text" type="text"
+							placeholder="*Enter your preference*" required> <label
+							class="select-error">{{pec.religionListErr}}</label>
+						</td>
+					</tr>
+
+					<tr>
+						<td><label>Mother Tongue</label></td>
+						<td>
+							<!-- <select ng-class="{'user-value' :pec.loggedUserService.basicInfoData.navPageData.language.userValues.value!=='' }" name="language" ng-change="pec.motherTongueText='';pec.enableDisableText(pec.uMotherTongue, 'motherTongue-o')" ng-model="pec.uMotherTongue" required>
+							<option ng-repeat="(key, val) in pec.motherTongueList | orderBy:key" value="{{key}}">{{val}}</option>
+						</select> --> <select
+							ng-class="{'user-value' :pec.loggedUserService.basicInfoData.navPageData.language.userValues.value!=='' }"
+							name="language"
+							ng-change="pec.motherTongueText='';pec.enableDisableText(pec.uMotherTongue, 'motherTongue-o')"
+							ng-model="pec.uMotherTongue"
+							ng-options="key as value for (key , value) in pec.motherTongueList | orderBy:key"
+							required></select> <input ng-if="pec.uMotherTongue==='Others'"
+							ng-model="pec.motherTongueText" style="width: 150px !important"
+							id="motherTongue-o" class="others-text" type="text"
+							placeholder="*Enter your preference*" required> <label
+							class="select-error">{{pec.motherTongueListErr}}</label>
+						</td>
+					</tr>
+
+					<tr>
+						<td><label>Community</label></td>
+						<td>
+							<!-- <select ng-class="{'user-value' :pec.loggedUserService.basicInfoData.navPageData.caste.userValues.value!=='' }" name="caste" ng-change="pec.communityListText='';pec.enableDisableText(pec.uCommunity, 'community-o')" ng-model="pec.uCommunity" required>
+							<option ng-repeat="(key, val) in pec.communityList | orderBy:key" value="{{key}}">{{val}}</option>
+						</select> --> <select
+							ng-class="{'user-value' :pec.loggedUserService.basicInfoData.navPageData.caste.userValues.value!=='' }"
+							name="caste"
+							ng-change="pec.communityListText='';pec.enableDisableText(pec.uCommunity, 'community-o')"
+							ng-model="pec.uCommunity"
+							ng-options="key as value for (key , value) in pec.communityList | orderBy:key"
+							required></select> <input ng-if="pec.uCommunity==='Others'"
+							ng-model="pec.communityListText" style="width: 150px !important"
+							id="community-o" class="others-text" type="text"
+							placeholder="*Enter your preference*" required> <label
+							class="select-error">{{pec.communityListErr}}</label>
+						</td>
+					</tr>
+
+					<tr>
+						<td><label>Sub-Community</label></td>
+						<td>
+							<!-- <select ng-class="{'user-value' :pec.loggedUserService.basicInfoData.navPageData.subCaste.userValues.value!=='' }" name="subcaste" ng-change="pec.subCommunityListText='';pec.enableDisableText(pec.uSubCommunity, 'subCommunity-o')" ng-model="pec.uSubCommunity" required>
+							<option ng-repeat="(key, val) in pec.subCommunityList | orderBy:key" value="{{key}}">{{val}}</option>
+						</select> --> <select
+							ng-class="{'user-value' :pec.loggedUserService.basicInfoData.navPageData.subCaste.userValues.value!=='' }"
+							name="subcaste"
+							ng-change="pec.subCommunityListText='';pec.enableDisableText(pec.uSubCommunity, 'subCommunity-o')"
+							ng-model="pec.uSubCommunity"
+							ng-options="key as value for (key , value) in pec.subCommunityList | orderBy:key"
+							required></select> <input ng-if="pec.uSubCommunity==='Others'"
+							ng-model="pec.subCommunityListText"
+							style="width: 150px !important" id="subCommunity-o"
+							class="others-text" type="text"
+							placeholder="*Enter your preference*" required> <label
+							class="select-error">{{pec.subCommunityListErr}}</label>
+						</td>
+					</tr>
+
+					<tr>
+						<td><label>Gothra / Gothram</label></td>
+						<td>
+							<!-- <select ng-class="{'user-value' :pec.loggedUserService.basicInfoData.navPageData.gothram.userValues.value!=='' }" name="gothram" ng-change="pec.gothraText='';pec.enableDisableText(pec.uGothra, 'gothra-o')" ng-model="pec.uGothra" required>
+							<option ng-repeat="(key, val) in pec.gothraList | orderBy:key" value="{{key}}">{{val}}</option>
+						</select> --> <select
+							ng-class="{'user-value' :pec.loggedUserService.basicInfoData.navPageData.gothram.userValues.value!=='' }"
+							name="gothram"
+							ng-change="pec.gothraText='';pec.enableDisableText(pec.uGothra, 'gothra-o')"
+							ng-model="pec.uGothra"
+							ng-options="key as value for (key , value) in pec.gothraList | orderBy:key"
+							required></select> <input ng-if="pec.uGothra==='Others'"
+							ng-model="pec.gothraText" style="width: 150px !important"
+							id="gothra-o" class="others-text" type="text"
+							placeholder="*Enter your preference*" required> <label
+							class="select-error">{{pec.gothraListErr}}</label>
+						</td>
+					</tr>
+					<tr>
+						<td><label>Blood Group</label></td>
+						<td><select
+							ng-class="{'user-value' :pec.loggedUserService.basicInfoData.navPageData.bloodGroup.userValues.value!=='' }"
+							ng-model="pec.bloodGroup" name="bloodGroup" required>
+								<option value="AA_DEFAULT">*Your Blood Group*</option>
+								<option value="A Positive">A+</option>
+								<option value="A Negative">A-</option>
+								<option value="B Positive">B+</option>
+								<option value="B Negative">B-</option>
+								<option value="AB Positive">AB+</option>
+								<option value="AB Negative">AB-</option>
+								<option value="O Positive">O+</option>
+								<option value="O Negative">O-</option>
+						</select> <label class="select-error">{{pec.bloodGroupErr}}</label></td>
+					</tr>
+					<tr>
+						<td colspan=2 class="pro-inner-navigator">
+							<button type="submit">>> Save & Proceed to Next</button>
+						</td>
+					</tr>
+				</table>
+			</form>
+			<form ng-show="pec.levels[1].showLevel" class="family-info"
+				ng-submit="pec.sendFamilyInfoData()">
+				<span ng-show="!pec.showFamilyForm"><br> <br> <br>
+					<span class="glyphicon glyphicon-repeat glyphicon-repeat-animate"></span><br>
+					<br> Fetching the latest data..</span>
+				<table ng-show="pec.showFamilyForm" id="FAMILY" width="100%"
+					class="level1">
+					<tr>
+						<td><label>Father's Status</label></td>
+						<td><select name="fatherStatus"
+							ng-class="{'user-value' :pec.loggedUserService.familyInfo.navPageData.FatherStatus.userValues.value!=='' }"
+							ng-model="pec.fatherStatus" required>
+								<option value="AA_DEFAULT">*Your Father's Status*</option>
+								<option>Alive</option>
+								<option>Passed Away</option>
+						</select> <label class="select-error">{{pec.fatherStatusErr}}</label></td>
+					</tr>
+					<tr>
+						<td><label>Mother's Status</label></td>
+						<td><select name="motherStatus"
+							ng-class="{'user-value' :pec.loggedUserService.familyInfo.navPageData.MotherStatus.userValues.value!=='' }"
+							ng-model="pec.motherStatus" required>
+								<option value="AA_DEFAULT">*Your Mother's Status*</option>
+								<option>Alive</option>
+								<option>Passed Away</option>
+						</select> <label class="select-error">{{pec.motherStatusErr}}</label></td>
+					</tr>
+					<tr>
+						<td><label>Family Location</label></td>
+						<td>
+							<!--<select ng-class="{'user-value' :pec.loggedUserService.familyInfo.navPageData.country.userValues.value!=='' }" name="country" ng-model="pec.currentCountry" ng-options="key as value for (key , value) in pec.countryList" required></select>	-->
+
+							<select
+							ng-class="{'user-value' :pec.loggedUserService.familyInfo.navPageData.state.userValues.value!=='' }"
+							name="state" ng-model="pec.currentState"
+							ng-options="key as value for (key , value) in pec.stateList"
+							required></select> <input ng-if="pec.uState==='Others'"
+							ng-model="pec.stateText" style="width: 150px !important"
+							id="state-o" class="others-text" type="text"
+							placeholder="Enter your preference*" required> <label
+							class="select-error">{{pec.stateListErr}}</label> <select
+							ng-class="{'user-value' :pec.loggedUserService.familyInfo.navPageData.city.userValues.value!=='' }"
+							name="city" ng-model="pec.currentCity"
+							ng-options="key as value for (key , value) in pec.cityList"
+							required></select> <input ng-if="pec.uCity==='Others'"
+							ng-model="pec.CityText" style="width: 150px !important"
+							id="city-o" class="others-text" type="text"
+							placeholder="*Enter your preference*" required> <label
+							class="select-error">{{pec.currentLocErr}}</label>
+						</td>
+					</tr>
+					<tr>
+						<td><label>Native Place</label></td>
+						<td><input name="nativePlace"
+							ng-class="{'user-value' :pec.loggedUserService.familyInfo.navPageData.NativePlace.userValues.value!=='' }"
+							type="text" placeholder="*Native Place*"
+							value="{{pec.loggedUserService.familyInfo.navPageData.NativePlace.userValues.value}}"
+							required></td>
+					</tr>
+					<tr>
+						<td><label>No. Of Siblings</label></td>
+						<td><input name="noOfSiblings"
+							ng-class="{'user-value' :pec.loggedUserService.familyInfo.navPageData.noOfSiblings.userValues.value!=='' }"
+							type="text" placeholder="*No.of Siblings*"
+							value="{{pec.loggedUserService.familyInfo.navPageData.noOfSiblings.userValues.value}}"
+							required></td>
+					</tr>
+					<tr>
+						<td><label>Family Type</label></td>
+						<td><input name="familyTypeID" type="radio"
+							value="{{pec.loggedUserService.familyInfo.navPageData.FamilyTypeID.userValues.value}}"
+							ng-checked="pec.loggedUserService.familyInfo.navPageData.FamilyTypeID.userValues.value==='FTY10000'"
+							required>&nbsp;Joint&emsp;&emsp; <input
+							name="familyTypeID" type="radio"
+							value="{{pec.loggedUserService.familyInfo.navPageData.FamilyTypeID.userValues.value}}"
+							ng-checked="pec.loggedUserService.familyInfo.navPageData.FamilyTypeID.userValues.value!=='FTY10000'"
+							required>&nbsp;Nuclear&emsp;&emsp;</td>
+					</tr>
+					<tr>
+						<td><label>Family Values</label></td>
+						<td><input name="familyValue" value="Liberal" type="radio"
+							ng-checked="pec.loggedUserService.familyInfo.navPageData.FamilyValue.userValues.value==='Liberal'"
+							required>&nbsp;Liberal&emsp;&emsp; <input
+							name="familyValue" type="radio" value="Moderate"
+							ng-checked="pec.loggedUserService.familyInfo.navPageData.FamilyValue.userValues.value==='Moderate'"
+							required>&nbsp;Moderate&emsp;&emsp; <input
+							name="familyValue" type="radio" value="Traditional"
+							ng-checked="pec.loggedUserService.familyInfo.navPageData.FamilyValue.userValues.value==='Traditional'"
+							required>&nbsp;Traditional&emsp;&emsp;</td>
+					</tr>
+					<tr>
+						<td><label>Affluence Level</label></td>
+						<td><select name="familyStatus"
+							ng-class="{'user-value' :pec.loggedUserService.familyInfo.navPageData.FamilyStatus.userValues.value!=='' }"
+							ng-model="pec.affluenceLevel" required>
+								<option value="AA_DEFAULT">*Your Affluence Level*</option>
+								<option>Middle Class</option>
+								<option>Rich</option>
+								<option>Upper Middle Class</option>
+						</select> <label class="select-error">{{pec.affluenceErr}}</label></td>
+					</tr>
+					<tr>
+						<td colspan=2 class="pro-inner-navigator">
+							<button type="submit">>> Save & Proceed to Next</button>
+						</td>
+					</tr>
+				</table>
+			</form>
+			<form ng-show="pec.levels[2].showLevel" class="astro-info"
+				ng-submit="pec.sendAstroInfoDetails()">
+				<span ng-show="!pec.showAstroForm"><br> <br> <br>
+					<span class="glyphicon glyphicon-repeat glyphicon-repeat-animate"></span><br>
+					<br> Fetching the latest data..</span>
+				<table ng-show="pec.showAstroForm" id="ASTRO" width="100%"
+					class="level1">
+					<tr>
+						<td><label>Dosham</label></td>
+						<td><input value="yes"
+							ng-checked="pec.loggedUserService.astroInfo.navPageData.dosham.userValues.value==='yes'"
+							type="radio" name="dosham" required>&nbsp;Yes&emsp;&emsp;
+							<input value="no"
+							ng-checked="pec.loggedUserService.astroInfo.navPageData.dosham.userValues.value==='no'"
+							type="radio" name="dosham" required>&nbsp;No&emsp;&emsp;
+							<input value="dontKnow"
+							ng-checked="pec.loggedUserService.astroInfo.navPageData.dosham.userValues.value==='dontKnow'"
+							type="radio" name="dosham" required>&nbsp;Don't
+							Know&emsp;&emsp;</td>
+					</tr>
+					<tr>
+						<td><label>Raasi</label></td>
+						<td><select
+							ng-change="pec.raasiText='';pec.enableDisableText(pec.uAstroRaasi, 'astroRaasi-o')"
+							ng-class="{'user-value' :pec.loggedUserService.astroInfo.navPageData.raasi.userValues.value!=='' }"
+							name="raasi" ng-model="pec.uAstroRaasi"
+							ng-options="key as value for (key , value) in pec.astroRaasiList"
+							required></select> <input ng-model="pec.raasiText"
+							ng-if="pec.uAstroRaasi==='Others'"
+							style="width: 150px !important" id="astroRaasi-o"
+							class="others-text" type="text"
+							placeholder="*Enter your preference*"> <label
+							class="select-error">{{pec.rassiErr}}</label></td>
+					</tr>
+					<tr>
+						<td><label>Nakshatra</label></td>
+						<td><select
+							ng-change="pec.nakshatraText='';pec.enableDisableText(pec.uNakshatra, 'nakshatra-o')"
+							ng-class="{'user-value' :pec.loggedUserService.astroInfo.navPageData.star.userValues.value!=='' }"
+							name="star" ng-model="pec.uNakshatra"
+							ng-options="key as value for (key , value) in pec.nakshatraList"
+							required></select> <input ng-model="pec.nakshatraText"
+							ng-if="pec.uNakshatra==='Others'" style="width: 150px !important"
+							id="nakshatra-o" class="others-text" type="text"
+							placeholder="*Enter your preference*"> <label
+							class="select-error">{{pec.starErr}}</label></td>
+					</tr>
+					<tr>
+						<td><label>Horoscope</label></td>
+						<td class="pro-inner-navigator"
+							style="text-align: left !important"><input
+							name="horoscopeLoc" id="upload-horo" style="display: none"
+							type="file" accept="image/*" multiple image="horos"
+							resize-max-height="320" resize-max-width="320"
+							resize-quality="0.7" />
+							<button type="button" class="btn-horo"
+								ng-disabled="pec.HoroPics.length===4"
+								ng-click="pec.triggerHororFileEvent()">Browse</button>&emsp; <input
+							type="hidden" name="horoscopeLoc"> <label
+							class="prof-upload-alert" ng-if="pec.HoroPics.length===4">*You
+								can upload maximum 4 pictures*</label></td>
+					</tr>
+					<tr>
+						<td colspan=2 class="pro-inner-navigator">
+							<button type="submit">>> Save & Proceed to Next</button>
+						</td>
+					</tr>
+					<tr>
+						<td colspan=2><span ng-if="pec.HoroPics.length>0"><b>Horoscopes</b></span>
+							<img ng-show="true" ng-if="$index<4" ng-repeat="img in horos"
+							ng-src="{{img.url}}" ng-init="pec.insertHoroToList(img, $index)" />
+							<div class="profile-horo-list" ng-show="pec.HoroPics.length>0">
+								<div ng-if="$index<4"
+									ng-repeat="img in pec.HoroPics.slice().reverse()">
+									<img class="horo-images" style="width: 132px; height: 104px;"
+										ng-class="{'img-sel' : ($index===pec.profIndex)}"
+										ng-src="{{img.url}}" /> <label class="horo-close"
+										ng-click="pec.removeHoroGalleryImage($index)">X</label>
+								</div>
+							</div></td>
+					</tr>
+				</table>
+			</form>
+			<form ng-show="pec.levels[3].showLevel" class="edu-info"
+				ng-submit="pec.sendEducationalInfoData()">
+				<span ng-show="!pec.showEDUForm"><br> <br> <br>
+					<span class="glyphicon glyphicon-repeat glyphicon-repeat-animate"></span><br>
+					<br> Fetching the latest data..</span>
+				<table ng-show="pec.showEDUForm" id="EDU" width="100%"
+					class="level1">
+					<tr>
+						<td><label>Education</label></td>
+						<td><select style="width: 250px;" name="education"
+							ng-change="pec.educationText='';pec.enableDisableText(pec.uEducation, 'education-o')"
+							ng-model="pec.uEducation"
+							ng-class="{'user-value' :pec.loggedUserService.educationalInfo.navPageData.education.userValues.value!=='' }"
+							ng-options="key as value for (key , value) in pec.educationList"
+							required></select> <input ng-model="pec.educationText"
+							ng-if="pec.uEducation==='Others'" style="width: 150px !important"
+							id="education-o" class="others-text" type="text"
+							placeholder="*Enter your preference*"> <label
+							class="select-error">{{pec.educationErr}}</label></td>
+					</tr>
+					<tr>
+						<td><label>Job Profile</label></td>
+						<td><select name="profession"
+							ng-change="pec.jobProfileText='';pec.enableDisableText(pec.uJobProfile, 'jobProfile-o')"
+							ng-model="pec.uJobProfile"
+							ng-class="{'user-value' :pec.loggedUserService.educationalInfo.navPageData.profession.userValues.value!=='' }"
+							ng-options="key as value for (key , value) in pec.jobProfileList"
+							required></select> <input ng-model="pec.jobProfileText"
+							ng-if="pec.uJobProfile==='Others'"
+							style="width: 150px !important" id="jobProfile-o"
+							class="others-text" type="text"
+							placeholder="*Enter your preference*"> <label
+							class="select-error">{{pec.jobProfileErr}}</label></td>
+					</tr>
+					<tr>
+						<td><label>Annual Income (Lakhs)</label></td>
+						<td>Between <select
+							ng-change="pec.changeUpperLimit('annualIncome_LL')"
+							name="annualIncome_LL" ng-model="pec.incomeLL"
+							ng-class="{'user-value' :pec.loggedUserService.educationalInfo.navPageData.annualIncome_LL.userValues.value!=='' }"
+							required>
+								<option>From</option>
+								<option>1</option>
+								<option>2</option>
+								<option>4</option>
+								<option>5</option>
+								<option>6</option>
+								<option>7</option>
+								<option>8</option>
+								<option>9</option>
+								<option>10</option>
+						</select> <select name="annualIncome_UL"
+							ng-class="{'user-value' :pec.loggedUserService.educationalInfo.navPageData.annualIncome_UL.userValues.value!=='' }"
+							ng-model="pec.incomeUL" required>
+								<option>To</option>
+								<option>2</option>
+								<option>4</option>
+								<option>5</option>
+								<option>6</option>
+								<option>7</option>
+								<option>8</option>
+								<option>9</option>
+								<option>10</option>
+								<option>11</option>
+								<option>12</option>
+								<option>13</option>
+								<option>14</option>
+								<option>15</option>
+						</select> <label class="select-error">{{pec.lowerLimErr}}</label> <label
+							class="select-error">{{pec.upperLimErr}}</label>
+						</td>
+					</tr>
+					<tr>
+						<td colspan=2 class="pro-inner-navigator">
+							<button type="submit">>> Save & Proceed to Next</button>
+						</td>
+					</tr>
+				</table>
+			</form>
+			<form ng-show="pec.levels[4].showLevel" class="lifeStyle-info"
+				ng-submit="pec.sendLifeStyleInfoDetails()">
+				<span ng-show="!pec.showLifeStyleForm"><br> <br> <br>
+					<span class="glyphicon glyphicon-repeat glyphicon-repeat-animate"></span><br>
+					<br> Fetching the latest data..</span>
+				<table id="LIFESTYLE" width="100%" ng-show="pec.showLifeStyleForm"
+					class="level1">
+					<tr>
+						<td><label>Diet</label></td>
+						<td><span
+							ng-repeat="(key, val) in pec.loggedUserService.lifeStyleInfo.navPageData.foodType.defaultValues">
+								<input
+								ng-checked="pec.loggedUserService.lifeStyleInfo.navPageData.foodType.userValues.value===val"
+								type="radio" ng-model="pec.aDiet" value="{{key}}"
+								name="foodType" required>&nbsp;{{val}}&emsp;&emsp;
+						</span></td>
+					</tr>
+					<tr>
+						<td><label>Drink</label></td>
+						<td><input type="radio"
+							ng-checked="pec.loggedUserService.lifeStyleInfo.navPageData.drinker.userValues.value==='yes'"
+							name="drinker" value="Yes" required>&nbsp;Yes&emsp;&emsp;
+							<input
+							ng-checked="pec.loggedUserService.lifeStyleInfo.navPageData.drinker.userValues.value==='no'"
+							type="radio" name="drinker" value="No" required>&nbsp;No&emsp;&emsp;
+							<input
+							ng-checked="pec.loggedUserService.lifeStyleInfo.navPageData.drinker.userValues.value==='ocassionally'"
+							type="radio" name="drinker" value="Ocassionally" required>&nbsp;Ocassionally&emsp;&emsp;
+						</td>
+					</tr>
+					<tr>
+						<td><label>Smoke</label></td>
+						<td><input
+							ng-checked="pec.loggedUserService.lifeStyleInfo.navPageData.smoker.userValues.value==='yes'"
+							type="radio" name="smoker" value="Yes" required>&nbsp;Yes&emsp;&emsp;
+							<input
+							ng-checked="pec.loggedUserService.lifeStyleInfo.navPageData.smoker.userValues.value==='no'"
+							type="radio" name="smoker" value="No" required>&nbsp;No&emsp;&emsp;
+							<input
+							ng-checked="pec.loggedUserService.lifeStyleInfo.navPageData.smoker.userValues.value==='ocassionally'"
+							type="radio" name="smoker" value="Ocassionally" required>&nbsp;Ocassionally&emsp;&emsp;
+						</td>
+					</tr>
+					<tr>
+						<td colspan=2 class="pro-inner-navigator">
+							<button type="submit">>> Save & Proceed to Next</button>
+						</td>
+					</tr>
+				</table>
+			</form>
+			<form ng-show="pec.levels[5].showLevel" class="partner-pref-info"
+				ng-submit="pec.sendPartnerPreferenceData()">
+				<span ng-show="!pec.showPartnerForm"><br> <br> <br>
+					<span class="glyphicon glyphicon-repeat glyphicon-repeat-animate"></span><br>
+					<br> Fetching the latest data..</span>
+				<table ng-show="pec.showPartnerForm" id="PARTNERSPREF" width="100%"
+					class="level1">
+					<tr>
+						<td><label>Age (yrs)</label></td>
+						<td>Between <select
+							ng-change="pec.changeUpperLimit('age_LL')" name="age_LL"
+							ng-model="pec.ageLL"
+							ng-class="{'user-value' :pec.loggedUserService.partnerPreferenceInfo.navPageData.age_LL.userValues.keyName1&&pec.loggedUserService.partnerPreferenceInfo.navPageData.age_LL.userValues.keyName1.value!=='' }"
+							required>
+								<option>From</option>
+								<option>18</option>
+								<option>19</option>
+								<option>20</option>
+								<option>21</option>
+						</select> <select name="age_UL"
+							ng-class="{'user-value' :pec.loggedUserService.partnerPreferenceInfo.navPageData.age_UL.userValues.keyName1&&pec.loggedUserService.partnerPreferenceInfo.navPageData.age_UL.userValues.keyName1.value!=='' }"
+							ng-model="pec.ageUL" required>
+								<option>To</option>
+								<option>25</option>
+								<option>28</option>
+								<option>35</option>
+								<option>40</option>
+						</select> <label class="select-error">{{pec.partnerAgeLowerLimErr}}</label>
+							<label class="select-error">{{pec.partnerAgeUpperLimErr}}</label>
+						</td>
+					</tr>
+					<tr>
+						<td><label>Height (cm)</label></td>
+						<td>Between <select
+							ng-change="pec.changeUpperLimit('height_LL')" name="height_LL"
+							ng-model="pec.heightLL"
+							ng-class="{'user-value' :pec.loggedUserService.partnerPreferenceInfo.navPageData.height_LL.userValues.keyName1&&pec.loggedUserService.partnerPreferenceInfo.navPageData.height_LL.userValues.keyName1.value!=='' }"
+							required>
+								<option>From</option>
+								<option>150</option>
+								<option>166</option>
+								<option>176</option>
+								<option>186</option>
+						</select> <select name="height_UL"
+							ng-class="{'user-value' :pec.loggedUserService.partnerPreferenceInfo.navPageData.height_UL.userValues.keyName1&&pec.loggedUserService.partnerPreferenceInfo.navPageData.height_UL.userValues.keyName1.value!=='' }"
+							ng-model="pec.heightUL" required>
+								<option>To</option>
+								<option>165</option>
+								<option>175</option>
+								<option>185</option>
+								<option>195</option>
+						</select> <label class="select-error">{{pec.partnerHeightLowerLimErr}}</label>
+							<label class="select-error">{{pec.partnerHeightUpperLimErr}}</label>
+						</td>
+					</tr>
+					<tr>
+						<td><label>Expecting</label></td>
+						<td><textArea pattern="{a-z}" value="100" maxlength="100"
+								ng-class="{'user-value' :pec.loggedUserService.partnerPreferenceInfo.navPageData.expectations.userValues.keyName1&&pec.loggedUserService.partnerPreferenceInfo.navPageData.expectations.userValues.keyName1.value!=='' }"
+								style="height: 75px;"
+								value="{{pec.loggedUserService.partnerPreferenceInfo.navPageData.expectations.userValues.keyName1.value}}"
+								name="expectation"
+								placeholder=" *** Few words about your Partner *** ">{{pec.loggedUserService.partnerPreferenceInfo.navPageData.expectations.userValues.keyName1.value}}</textArea>
+					</tr>
+					<tr>
+						<td><label>Weight (kg)</label></td>
+						<td>Between <select
+							ng-change="pec.changeUpperLimit('weight_LL')" name="weight_LL"
+							ng-model="pec.weightLL"
+							ng-class="{'user-value' :pec.loggedUserService.partnerPreferenceInfo.navPageData.weight_LL.userValues.keyName1&&pec.loggedUserService.partnerPreferenceInfo.navPageData.weight_LL.userValues.keyName1.value!=='' }"
+							required>
+								<option>From</option>
+								<option>40</option>
+								<option>50</option>
+								<option>60</option>
+								<option>70</option>
+								<option>80</option>
+								<option>90</option>
+						</select> <select name="weight_UL"
+							ng-class="{'user-value' :pec.loggedUserService.partnerPreferenceInfo.navPageData.weight_UL.userValues.keyName1&&pec.loggedUserService.partnerPreferenceInfo.navPageData.weight_UL.userValues.keyName1.value!=='' }"
+							ng-model="pec.weightUL" required>
+								<option>To</option>
+								<option>50</option>
+								<option>60</option>
+								<option>70</option>
+								<option>80</option>
+								<option>90</option>
+								<option>100</option>
+								<option>120</option>
+						</select> <label class="select-error">{{pec.partnerWeightLowerLimErr}}</label>
+							<label class="select-error">{{pec.partnerWeightUpperLimErr}}</label>
+						</td>
+					</tr>
+					<tr>
+						<td><label>Annual Income (Lakhs)</label></td>
+						<td>Between <select
+							ng-change="pec.changeUpperLimit('income_LL')" name="income_LL"
+							ng-model="pec.uIncomeLL"
+							ng-class="{'user-value' :pec.loggedUserService.partnerPreferenceInfo.navPageData.income_LL.userValues.keyName1&&pec.loggedUserService.partnerPreferenceInfo.navPageData.income_LL.userValues.keyName1.value!=='' }"
+							required>
+								<option>From</option>
+								<option>1</option>
+								<option>2</option>
+								<option>3</option>
+								<option>4</option>
+								<option>5</option>
+								<option>6</option>
+								<option>7</option>
+								<option>8</option>
+								<option>9</option>
+								<option>10</option>
+						</select> <select name="income_UL"
+							ng-class="{'user-value' :pec.loggedUserService.partnerPreferenceInfo.navPageData.income_UL.userValues.keyName1&&pec.loggedUserService.partnerPreferenceInfo.navPageData.income_UL.userValues.keyName1.value!=='' }"
+							ng-model="pec.uIncomeUL" required>
+								<option>To</option>
+								<option>1</option>
+								<option>2</option>
+								<option>3</option>
+								<option>4</option>
+								<option>5</option>
+								<option>6</option>
+								<option>7</option>
+								<option>8</option>
+								<option>9</option>
+								<option>10</option>
+								<option>11</option>
+								<option>12</option>
+								<option>13</option>
+								<option>14</option>
+								<option>15</option>
+
+						</select> <label class="select-error">{{pec.partnerIncomeLowerLimErr}}</label>
+							<label class="select-error">{{pec.partnerIncomeUpperLimErr}}</label>
+						</td>
+					</tr>
+					<tr>
+						<td><label>Marital Status</label></td>
+						<td><select
+							ng-class="{'user-value' :pec.loggedUserService.partnerPreferenceInfo.navPageData.martialStatus.userValues.keyName1&&pec.loggedUserService.partnerPreferenceInfo.navPageData.martialStatus.userValues.keyName1.value!=='' }"
+							name="relationShipID" ng-model="pec.partnerMaritalStatus"
+							ng-options="key as value for (key , value) in pec.partnerMaritalStatusList"
+							required></select> <label class="select-error">{{pec.partnerMaritalStatusErr}}</label>
+						</td>
+					</tr>
+					<tr>
+						<td><label>Diet</label></td>
+						<td><span
+							ng-repeat="(key, val) in pec.loggedUserService.partnerPreferenceInfo.navPageData.foodType.defaultValues">
+								<input
+								ng-checked="pec.loggedUserService.partnerPreferenceInfo.navPageData.foodType.userValues.keyName1.value===val"
+								type="radio" value="{{key}}" name="foodtypeid" required>&nbsp;{{val}}&emsp;&emsp;
+						</span></td>
+					</tr>
+					<tr>
+						<td><label>Drink</label></td>
+						<td><input type="radio"
+							ng-checked="pec.loggedUserService.partnerPreferenceInfo.navPageData.drinker.userValues.keyName1.value==='yes'"
+							name="drinker" value="Yes" required>&nbsp;Yes&emsp;&emsp;
+							<input
+							ng-checked="pec.loggedUserService.partnerPreferenceInfo.navPageData.drinker.userValues.keyName1.value==='no'"
+							type="radio" name="drinker" value="No" required>&nbsp;No&emsp;&emsp;
+							<input
+							ng-checked="pec.loggedUserService.partnerPreferenceInfo.navPageData.drinker.userValues.keyName1.value==='ocassionally'"
+							type="radio" name="drinker" value="Ocassionally" required>&nbsp;Ocassionally&emsp;&emsp;
+						</td>
+					</tr>
+					<tr>
+						<td><label>Smoke</label></td>
+						<td><input
+							ng-checked="pec.loggedUserService.partnerPreferenceInfo.navPageData.smoker.userValues.keyName1.value==='yes'"
+							type="radio" name="smoker" value="Yes" required>&nbsp;Yes&emsp;&emsp;
+							<input
+							ng-checked="pec.loggedUserService.partnerPreferenceInfo.navPageData.smoker.userValues.keyName1.value==='no'"
+							type="radio" name="smoker" value="No" required>&nbsp;No&emsp;&emsp;
+							<input
+							ng-checked="pec.loggedUserService.partnerPreferenceInfo.navPageData.smoker.userValues.keyName1.value==='ocassionally'"
+							type="radio" name="smoker" value="Ocassionally" required>&nbsp;Ocassionally&emsp;&emsp;
+						</td>
+					</tr>
+					<tr>
+						<td><label>Professional</label></td>
+						<td><select id="select-uPProfessional-o"
+							ng-if="!pec.loggedUserService.partnerPreferenceInfo.navPageData.education.userValues.keyName1 || pec.loggedUserService.partnerPreferenceInfo.navPageData.education.userValues.keyName1.value===''"
+							ng-change="pec.enableDisableText(pec.uPProfessional, 'uPProfessional-o', 'partnerProfeesionalErr', 'professionID')"
+							style="width: 250px;" name="professionID"
+							ng-model="pec.uPProfessional"
+							ng-class="{'user-value' :pec.loggedUserService.partnerPreferenceInfo.navPageData.education.userValues.keyName1&&pec.loggedUserService.partnerPreferenceInfo.navPageData.education.userValues.keyName1.value!=='' }"
+							ng-options="key as value for (key , value) in pec.partnerProfessionalList"
+							required></select> <span
+							ng-if="pec.loggedUserService.partnerPreferenceInfo.navPageData.education.userValues.keyName1&&pec.loggedUserService.partnerPreferenceInfo.navPageData.education.userValues.keyName1.value!==''"
+							ng-repeat="(key, val) in pec.loggedUserService.partnerPreferenceInfo.navPageData.profession.userValues">
+								<select id="select-uPProfessional-o{{$index+1}}"
+								ng-change="pec.enableDisableText(pec['uPProfessional'+($index+1)], 'uPProfessional-o'+($index+1), 'partnerProfeesionalErr')"
+								style="width: 250px;" name="professionID"
+								ng-model="pec['uPProfessional'+($index+1)]"
+								ng-class="{'user-value' :pec.loggedUserService.partnerPreferenceInfo.navPageData.profession.userValues[key]&&pec.loggedUserService.partnerPreferenceInfo.navPageData.profession.userValues[key].value!=='' }"
+								ng-options="key as value for (key , value) in pec['partnerProfessionalList'+($index+1)]"
+								required></select> <input name="professionID{{$index+1}}"
+								style="width: 150px !important"
+								id="uPProfessional-o{{$index+1}}" class="others-text"
+								type="text" placeholder="*Enter your partner preference*">
+						</span>
+							<button type="button" style="font-size: 18px"
+								ng-click="pec.cloneSelect($event, 'professionID', 'partnerProfeesionalErr')">+</button>
+							<label class="select-error">{{pec.partnerProfeesionalErr}}</label>
+						</td>
+					</tr>
+					<tr>
+						<td><label>Qualification</label></td>
+						<td><select id="select-uPQualification-o"
+							ng-if="!pec.loggedUserService.partnerPreferenceInfo.navPageData.profession.userValues.keyName1 || pec.loggedUserService.partnerPreferenceInfo.navPageData.profession.userValues.keyName1.value===''"
+							ng-change="pec.enableDisableText(pec.uPQualification, 'uPQualification-o', 'partnerQualificationErr')"
+							style="width: 250px;" name="QualificationID"
+							ng-model="pec.uPQualification"
+							ng-class="{'user-value' :pec.loggedUserService.partnerPreferenceInfo.navPageData.profession.userValues.keyName1&&pec.loggedUserService.partnerPreferenceInfo.navPageData.profession.userValues.keyName1.value!=='' }"
+							ng-options="key as value for (key , value) in pec.partnerQualificationList"
+							required></select> <span
+							ng-if="pec.loggedUserService.partnerPreferenceInfo.navPageData.profession.userValues.keyName1&&pec.loggedUserService.partnerPreferenceInfo.navPageData.profession.userValues.keyName1.value!==''"
+							ng-repeat="(key, val) in pec.loggedUserService.partnerPreferenceInfo.navPageData.education.userValues">
+								<select id="select-uPQualification-o{{$index+1}}"
+								ng-change="pec.enableDisableText(pec['uPQualification'+($index+1)], 'uPQualification-o'+($index+1), 'partnerQualificationErr')"
+								style="width: 250px;" name="QualificationID"
+								ng-model="pec['uPQualification'+($index+1)]"
+								ng-class="{'user-value' :pec.loggedUserService.partnerPreferenceInfo.navPageData.education.userValues[key]&&pec.loggedUserService.partnerPreferenceInfo.navPageData.education.userValues[key].value!=='' }"
+								ng-options="key as value for (key , value) in pec['partnerQualificationList'+($index+1)]"
+								required></select> <input name="QualificationID{{$index+1}}"
+								style="width: 150px !important"
+								id="uPQualification-o{{$index+1}}" class="others-text"
+								type="text" placeholder="*Enter your partner preference*">
+						</span>
+							<button type="button" style="font-size: 18px"
+								ng-click="pec.cloneSelect($event, 'QualificationID', 'partnerQualificationErr')">+</button>
+							<label class="select-error">{{pec.partnerQualificationErr}}</label>
+						</td>
+					</tr>
+					<tr>
+						<td><label>Current Location</label></td>
+						<td><span
+							ng-repeat="(key, val) in pec.loggedUserService.partnerPreferenceInfo.navPageData.country.userValues">
+								<!--<select id="pCountry" ng-change="pec.enableDisableText('', '', 'partnerCountryErr')" ng-class="{'user-value' :pec.loggedUserService.partnerPreferenceInfo.navPageData.country.userValues[key]&&pec.loggedUserService.partnerPreferenceInfo.navPageData.country.userValues[key].value!=='' }" name="countryID1" ng-model="pec['pCurrentCountry'+($index+1)]" ng-options="key as value for (key , value) in pec['countryList'+($index+1)]" required></select>-->
+								<select id="pState"
+								ng-change="pec.enableDisableText('', '', 'partnerCountryErr')"
+								ng-class="{'user-value' :pec.loggedUserService.partnerPreferenceInfo.navPageData.state.userValues[key]&&pec.loggedUserService.partnerPreferenceInfo.navPageData.state.userValues[key].value!=='' }"
+								name="StateID1" ng-model="pec['pCurrentState'+($index+1)]"
+								ng-options="key as value for (key , value) in pec['stateList'+($index+1)]"
+								required></select> <span
+								ng-if="pec.loggedUserService.partnerPreferenceInfo.navPageData.pState.userValues.keyName1&&pec.loggedUserService.partnerPreferenceInfo.navPageData.pState.userValues.keyName1.value!==''"
+								ng-repeat="(key, val) in pec.loggedUserService.partnerPreferenceInfo.navPageData.pState.userValues">
+									<select id="select-uPState-o{{$index+1}}"
+									ng-change="pec.enableDisableText(pec['uPState'+($index+1)], 'uPState-o'+($index+1), 'partnerStateErr')"
+									style="width: 250px;" name="StateID"
+									ng-model="pec['uPState'+($index+1)]"
+									ng-class="{'user-value' :pec.loggedUserService.partnerPreferenceInfo.navPageData.state.userValues[key]&&pec.loggedUserService.partnerPreferenceInfo.navPageData.state.userValues[key].value!=='' }"
+									ng-options="key as value for (key , value) in pec['partnerStateList'+($index+1)]"
+									required></select> <input name="StateID{{$index+1}}"
+									style="width: 150px !important" id="uPState-o{{$index+1}}"
+									class="others-text" type="text"
+									placeholder="*Enter your partner preference*">
+							</span> <select id="pCity"
+								ng-change="pec.enableDisableText('', '', 'partnerCountryErr')"
+								ng-class="{'user-value' :pec.loggedUserService.partnerPreferenceInfo.navPageData.city.userValues[key]&&pec.loggedUserService.partnerPreferenceInfo.navPageData.city.userValues[key].value!=='' }"
+								name="CityID1" ng-model="pec['pCurrentCity'+($index+1)]"
+								ng-options="key as value for (key , value) in pec['cityList'+($index+1)]"
+								required></select> <!--<input ng-if="pec.upCity==='Others'" ng-model="pec.pcityText" style="width:150px!important" id="pcity-o" class="others-text" type="text" placeholder="Enter your preference*" required>				-->
+								<span
+								ng-if="pec.loggedUserService.partnerPreferenceInfo.navPageData.pCity.userValues.keyName1&&pec.loggedUserService.partnerPreferenceInfo.navPageData.pCity.userValues.keyName1.value!==''"
+								ng-repeat="(key, val) in pec.loggedUserService.partnerPreferenceInfo.navPageData.pCity.userValues">
+									<select id="select-uPCity-o{{$index+1}}"
+									ng-change="pec.enableDisableText(pec['uPCity'+($index+1)], 'uPCity-o'+($index+1), 'partnerCityErr')"
+									style="width: 250px;" name="CityID"
+									ng-model="pec['uPCity'+($index+1)]"
+									ng-class="{'user-value' :pec.loggedUserService.partnerPreferenceInfo.navPageData.city.userValues[key]&&pec.loggedUserService.partnerPreferenceInfo.navPageData.city.userValues[key].value!=='' }"
+									ng-options="key as value for (key , value) in pec['partnerCityList'+($index+1)]"
+									required></select> <input name="CityID{{$index+1}}"
+									style="width: 150px !important" id="uPCity-o{{$index+1}}"
+									class="others-text" type="text"
+									placeholder="*Enter your partner preference*">
+							</span> <!--<button type="button" style="font-size:18px" ng-click="pec.cloneLocationSelect($event, 'partnerCountryErr')">+</button>-->
+								<!--<label class="select-error">{{pec.partnerCountryErr}}</label>-->
+								<label class="select-error">{{pec.partnerStateErr}}</label> <label
+								class="select-error">{{pec.partnerCityErr}}</label></td>
+					</tr>
+					<tr>
+						<td><label>Religion</label></td>
+						<td><select id="select-uPReligion-o"
+							ng-if="!pec.loggedUserService.partnerPreferenceInfo.navPageData.religion.userValues.keyName1 || pec.loggedUserService.partnerPreferenceInfo.navPageData.religion.userValues.keyName1.value===''"
+							ng-change="pec.enableDisableText(pec.uPReligion, 'uPReligion-o', 'partnerReligionErr')"
+							style="width: 250px;" name="ReligionID" ng-model="pec.uPReligion"
+							ng-class="{'user-value' :pec.loggedUserService.partnerPreferenceInfo.navPageData.religion.userValues.keyName1&&pec.loggedUserService.partnerPreferenceInfo.navPageData.religion.userValues.keyName1.value!=='' }"
+							ng-options="key as value for (key , value) in pec.partnerReligionList"
+							required></select> <span
+							ng-if="pec.loggedUserService.partnerPreferenceInfo.navPageData.religion.userValues.keyName1&&pec.loggedUserService.partnerPreferenceInfo.navPageData.religion.userValues.keyName1.value!==''"
+							ng-repeat="(key, val) in pec.loggedUserService.partnerPreferenceInfo.navPageData.religion.userValues">
+								<select id="select-uPReligion-o{{$index+1}}"
+								ng-change="pec.enableDisableText(pec['uPReligion'+($index+1)], 'uPReligion-o'+($index+1), 'partnerReligionErr')"
+								style="width: 250px;" name="ReligionID"
+								ng-model="pec['uPReligion'+($index+1)]"
+								ng-class="{'user-value' :pec.loggedUserService.partnerPreferenceInfo.navPageData.religion.userValues[key]&&pec.loggedUserService.partnerPreferenceInfo.navPageData.religion.userValues[key].value!=='' }"
+								ng-options="key as value for (key , value) in pec['partnerReligionList'+($index+1)]"
+								required></select> <input name="ReligionID{{$index+1}}"
+								style="width: 150px !important" id="uPReligion-o{{$index+1}}"
+								class="others-text" type="text"
+								placeholder="*Enter your partner preference*">
+						</span>
+							<button type="button" style="font-size: 18px"
+								ng-click="pec.cloneSelect($event, 'ReligionID', 'partnerReligionErr')">+</button>
+							<label class="select-error">{{pec.partnerReligionErr}}</label></td>
+					</tr>
+
+					<tr>
+						<td><label>Mother Tongue</label></td>
+						<td><select id="select-uPMotherTongue-o"
+							ng-if="!pec.loggedUserService.partnerPreferenceInfo.navPageData.language.userValues.keyName1 || pec.loggedUserService.partnerPreferenceInfo.navPageData.language.userValues.keyName1.value===''"
+							ng-change="pec.enableDisableText(pec.uPMotherTongue, 'uPMotherTongue-o', 'partnerMotherTongueErr')"
+							style="width: 250px;" name="motherTongueID"
+							ng-model="pec.uPMotherTongue"
+							ng-class="{'user-value' :pec.loggedUserService.partnerPreferenceInfo.navPageData.language.userValues.keyName1&&pec.loggedUserService.partnerPreferenceInfo.navPageData.language.userValues.keyName1.value!=='' }"
+							ng-options="key as value for (key , value) in pec.partnerMotherTongueList"
+							required></select> <span
+							ng-if="pec.loggedUserService.partnerPreferenceInfo.navPageData.language.userValues.keyName1&&pec.loggedUserService.partnerPreferenceInfo.navPageData.language.userValues.keyName1.value!==''"
+							ng-repeat="(key, val) in pec.loggedUserService.partnerPreferenceInfo.navPageData.language.userValues">
+								<select id="select-uPMotherTongue-o{{$index+1}}"
+								ng-change="pec.enableDisableText(pec['uPMotherTongue'+($index+1)], 'uPMotherTongue-o'+($index+1), 'partnerMotherTongueErr')"
+								style="width: 250px;" name="motherTongueID"
+								ng-model="pec['uPMotherTongue'+($index+1)]"
+								ng-class="{'user-value' :pec.loggedUserService.partnerPreferenceInfo.navPageData.language.userValues[key]&&pec.loggedUserService.partnerPreferenceInfo.navPageData.language.userValues[key].value!=='' }"
+								ng-options="key as value for (key , value) in pec['partnerMotherTongueList'+($index+1)]"
+								required></select> <input name="motherTongueID{{$index+1}}"
+								style="width: 150px !important"
+								id="uPMotherTongue-o{{$index+1}}" class="others-text"
+								type="text" placeholder="*Enter your partner preference*">
+						</span>
+							<button type="button" style="font-size: 18px"
+								ng-click="pec.cloneSelect($event, 'motherTongueID', 'partnerMotherTongueErr')">+</button>
+							<label class="select-error">{{pec.partnerMotherTongueErr}}</label>
+						</td>
+					</tr>
+
+					<tr>
+						<td><label>Community</label></td>
+						<td><select id="select-uPCommunity-o"
+							ng-if="!pec.loggedUserService.partnerPreferenceInfo.navPageData.caste.userValues.keyName1 || pec.loggedUserService.partnerPreferenceInfo.navPageData.caste.userValues.keyName1.value===''"
+							ng-change="pec.enableDisableText(pec.uPCommunity, 'uPCommunity-o', 'partnerCommunityErr')"
+							style="width: 250px;" name="casteID" ng-model="pec.uPCommunity"
+							ng-class="{'user-value' :pec.loggedUserService.partnerPreferenceInfo.navPageData.caste.userValues.keyName1&&pec.loggedUserService.partnerPreferenceInfo.navPageData.caste.userValues.keyName1.value!=='' }"
+							ng-options="key as value for (key , value) in pec.partnerCommunityList"
+							required></select> <span
+							ng-if="pec.loggedUserService.partnerPreferenceInfo.navPageData.caste.userValues.keyName1&&pec.loggedUserService.partnerPreferenceInfo.navPageData.caste.userValues.keyName1.value!==''"
+							ng-repeat="(key, val) in pec.loggedUserService.partnerPreferenceInfo.navPageData.caste.userValues">
+								<select id="select-uPCommunity-o{{$index+1}}"
+								ng-change="pec.enableDisableText(pec['uPCommunity'+($index+1)], 'uPCommunity-o'+($index+1), 'partnerCommunityErr')"
+								style="width: 250px;" name="casteID"
+								ng-model="pec['uPCommunity'+($index+1)]"
+								ng-class="{'user-value' :pec.loggedUserService.partnerPreferenceInfo.navPageData.caste.userValues[key]&&pec.loggedUserService.partnerPreferenceInfo.navPageData.caste.userValues[key].value!=='' }"
+								ng-options="key as value for (key , value) in pec['partnerCommunityList'+($index+1)]"
+								required></select> <input name="casteID{{$index+1}}"
+								style="width: 150px !important" id="uPCommunity-o{{$index+1}}"
+								class="others-text" type="text"
+								placeholder="*Enter your partner preference*">
+						</span>
+							<button type="button" style="font-size: 18px"
+								ng-click="pec.cloneSelect($event, 'casteID', 'partnerCommunityErr')">+</button>
+							<label class="select-error">{{pec.partnerCommunityErr}}</label></td>
+					</tr>
+
+					<tr>
+						<td><label>Sub-Community</label></td>
+						<td><select id="select-uPSubCommunity-o"
+							ng-if="!pec.loggedUserService.partnerPreferenceInfo.navPageData.subCaste.userValues.keyName1 || pec.loggedUserService.partnerPreferenceInfo.navPageData.subCaste.userValues.keyName1.value===''"
+							ng-change="pec.enableDisableText(pec.uPSubCommunity, 'uPSubCommunity-o', 'partnerSubCommunityErr')"
+							style="width: 250px;" name="SubCasteID"
+							ng-model="pec.uPSubCommunity"
+							ng-class="{'user-value' :pec.loggedUserService.partnerPreferenceInfo.navPageData.subCaste.userValues.keyName1&&pec.loggedUserService.partnerPreferenceInfo.navPageData.subCaste.userValues.keyName1.value!=='' }"
+							ng-options="key as value for (key , value) in pec.partnerSubCommunityList"
+							required></select> <span
+							ng-if="pec.loggedUserService.partnerPreferenceInfo.navPageData.subCaste.userValues.keyName1&&pec.loggedUserService.partnerPreferenceInfo.navPageData.subCaste.userValues.keyName1.value!==''"
+							ng-repeat="(key, val) in pec.loggedUserService.partnerPreferenceInfo.navPageData.subCaste.userValues">
+								<select id="select-uPSubCommunity-o{{$index+1}}"
+								ng-change="pec.enableDisableText(pec['uPSubCommunity'+($index+1)], 'uPSubCommunity-o'+($index+1), 'partnerSubCommunityErr')"
+								style="width: 250px;" name="SubCasteID"
+								ng-model="pec['uPSubCommunity'+($index+1)]"
+								ng-class="{'user-value' :pec.loggedUserService.partnerPreferenceInfo.navPageData.subCaste.userValues[key]&&pec.loggedUserService.partnerPreferenceInfo.navPageData.subCaste.userValues[key].value!=='' }"
+								ng-options="key as value for (key , value) in pec['partnerSubCommunityList'+($index+1)]"
+								required></select> <input name="SubCasteID{{$index+1}}"
+								style="width: 150px !important"
+								id="uPSubCommunity-o{{$index+1}}" class="others-text"
+								type="text" placeholder="*Enter your partner preference*">
+						</span>
+							<button type="button" style="font-size: 18px"
+								ng-click="pec.cloneSelect($event, 'SubCasteID', 'partnerSubCommunityErr')">+</button>
+							<label class="select-error">{{pec.partnerSubCommunityErr}}</label>
+						</td>
+					</tr>
+					<tr>
+						<td><label>Dosham</label></td>
+						<td><input value="yes"
+							ng-checked="pec.loggedUserService.partnerPreferenceInfo.navPageData.dosham.userValues.keyName1.value==='yes'"
+							type="radio" name="dosham" required>&nbsp;Yes&emsp;&emsp;
+							<input value="no"
+							ng-checked="pec.loggedUserService.partnerPreferenceInfo.navPageData.dosham.userValues.keyName1.value==='no'"
+							type="radio" name="dosham" required>&nbsp;No&emsp;&emsp;
+						</td>
+					</tr>
+					<tr>
+						<td><label>Raasi</label></td>
+						<td><select id="select-uPRaasi-o"
+							ng-if="!pec.loggedUserService.partnerPreferenceInfo.navPageData.raasi.userValues.keyName1 || pec.loggedUserService.partnerPreferenceInfo.navPageData.raasi.userValues.keyName1.value===''"
+							ng-change="pec.enableDisableText(pec.uPRaasi, 'uPRaasi-o', 'partnerRassiErr')"
+							style="width: 250px;" name="RaasiID" ng-model="pec.uPRaasi"
+							ng-class="{'user-value' :pec.loggedUserService.partnerPreferenceInfo.navPageData.raasi.userValues.keyName1&&pec.loggedUserService.partnerPreferenceInfo.navPageData.raasi.userValues.keyName1.value!=='' }"
+							ng-options="key as value for (key , value) in pec.partnerRaasiList"
+							required></select> <span
+							ng-if="pec.loggedUserService.partnerPreferenceInfo.navPageData.raasi.userValues.keyName1&&pec.loggedUserService.partnerPreferenceInfo.navPageData.raasi.userValues.keyName1.value!==''"
+							ng-repeat="(key, val) in pec.loggedUserService.partnerPreferenceInfo.navPageData.raasi.userValues">
+								<select id="select-uPRaasi-o{{$index+1}}"
+								ng-change="pec.enableDisableText(pec['uPRaasi'+($index+1)], 'uPRaasi-o'+($index+1), 'partnerRassiErr')"
+								style="width: 250px;" name="RaasiID"
+								ng-model="pec['uPRaasi'+($index+1)]"
+								ng-class="{'user-value' :pec.loggedUserService.partnerPreferenceInfo.navPageData.raasi.userValues[key]&&pec.loggedUserService.partnerPreferenceInfo.navPageData.raasi.userValues[key].value!=='' }"
+								ng-options="key as value for (key , value) in pec['partnerRaasiList'+($index+1)]"
+								required></select> <input name="RaasiID{{$index+1}}"
+								style="width: 150px !important" id="uPRaasi-o{{$index+1}}"
+								class="others-text" type="text"
+								placeholder="*Enter your partner preference*">
+						</span>
+							<button type="button" style="font-size: 18px"
+								ng-click="pec.cloneSelect($event, 'RaasiID', 'partnerRassiErr')">+</button>
+							<label class="select-error">{{pec.partnerRassiErr}}</label></td>
+					</tr>
+					<tr>
+						<td><label>Nakshatra</label></td>
+						<td><select id="select-uPNakshatra-o"
+							ng-if="!pec.loggedUserService.partnerPreferenceInfo.navPageData.star.userValues.keyName1 || pec.loggedUserService.partnerPreferenceInfo.navPageData.star.userValues.keyName1.value===''"
+							ng-change="pec.enableDisableText(pec.uPNakshatra, 'uPNakshatra-o', 'partnerStarErr')"
+							style="width: 250px;" name="StarID" ng-model="pec.uPNakshatra"
+							ng-class="{'user-value' :pec.loggedUserService.partnerPreferenceInfo.navPageData.star.userValues.keyName1&&pec.loggedUserService.partnerPreferenceInfo.navPageData.star.userValues.keyName1.value!=='' }"
+							ng-options="key as value for (key , value) in pec.partnerNakshatraList"
+							required></select> <span
+							ng-if="pec.loggedUserService.partnerPreferenceInfo.navPageData.star.userValues.keyName1&&pec.loggedUserService.partnerPreferenceInfo.navPageData.star.userValues.keyName1.value!==''"
+							ng-repeat="(key, val) in pec.loggedUserService.partnerPreferenceInfo.navPageData.star.userValues">
+								<select id="select-uPNakshatra-o{{$index+1}}"
+								ng-change="pec.enableDisableText(pec['uPNakshatra'+($index+1)], 'uPNakshatra-o'+($index+1), 'partnerStarErr')"
+								style="width: 250px;" name="StarID"
+								ng-model="pec['uPNakshatra'+($index+1)]"
+								ng-class="{'user-value' :pec.loggedUserService.partnerPreferenceInfo.navPageData.star.userValues[key]&&pec.loggedUserService.partnerPreferenceInfo.navPageData.star.userValues[key].value!=='' }"
+								ng-options="key as value for (key , value) in pec['partnerNakshatraList'+($index+1)]"
+								required></select> <input name="StarID{{$index+1}}"
+								style="width: 150px !important" id="uPNakshatra-o{{$index+1}}"
+								class="others-text" type="text"
+								placeholder="*Enter your partner preference*">
+						</span>
+							<button type="button" style="font-size: 18px"
+								ng-click="pec.cloneSelect($event, 'StarID', 'partnerStarErr')">+</button>
+							<label class="select-error">{{pec.partnerStarErr}}</label></td>
+					</tr>
+					<tr>
+						<td><label>Gothra / Gothram</label></td>
+						<td><select id="select-uPGothra-o"
+							ng-if="!pec.loggedUserService.partnerPreferenceInfo.navPageData.gothram.userValues.keyName1 || pec.loggedUserService.partnerPreferenceInfo.navPageData.gothram.userValues.keyName1.value===''"
+							ng-change="pec.enableDisableText(pec.uPGothra, 'uPGothra-o', 'partnerGothraErr')"
+							style="width: 250px;" name="GothramID" ng-model="pec.uPGothra"
+							ng-class="{'user-value' :pec.loggedUserService.partnerPreferenceInfo.navPageData.gothram.userValues.keyName1&&pec.loggedUserService.partnerPreferenceInfo.navPageData.gothram.userValues.keyName1.value!=='' }"
+							ng-options="key as value for (key , value) in pec.partnerGothraList"
+							required></select> <span
+							ng-if="pec.loggedUserService.partnerPreferenceInfo.navPageData.gothram.userValues.keyName1&&pec.loggedUserService.partnerPreferenceInfo.navPageData.gothram.userValues.keyName1.value!==''"
+							ng-repeat="(key, val) in pec.loggedUserService.partnerPreferenceInfo.navPageData.gothram.userValues">
+								<select id="select-uPGothra-o{{$index+1}}"
+								ng-change="pec.enableDisableText(pec['uPGothra'+($index+1)], 'uPGothra-o'+($index+1), 'partnerGothraErr')"
+								style="width: 250px;" name="GothramID"
+								ng-model="pec['uPGothra'+($index+1)]"
+								ng-class="{'user-value' :pec.loggedUserService.partnerPreferenceInfo.navPageData.gothram.userValues[key]&&pec.loggedUserService.partnerPreferenceInfo.navPageData.gothram.userValues[key].value!=='' }"
+								ng-options="key as value for (key , value) in pec['partnerGothraList'+($index+1)]"
+								required></select> <input ng-init="pec.hideAllOThersField()"
+								name="GothramID{{$index+1}}" style="width: 150px !important"
+								id="uPGothra-o{{$index+1}}" class="others-text" type="text"
+								placeholder="*Enter your partner preference*">
+						</span>
+							<button type="button" style="font-size: 18px"
+								ng-click="pec.cloneSelect($event, 'GothramID', 'partnerGothraErr')">+</button>
+							<label class="select-error">{{pec.partnerGothraErr}}</label></td>
+					</tr>
+					<tr>
+						<td colspan=2 class="pro-inner-navigator">
+							<button type="submit">Save</button>
+						</td>
+					</tr>
+				</table>
+			</form>
+		</div>
+	</div>
+	<div class="col-lg-2 col-md-2 col-sm-2 col-xs-2 ad-banner">
+		<img src="images/app-ad.png"><br> <img
+			src="images/ad-banner-2.png" href="#memberShip">
+	</div>
+</div>
+<div ng-include src="'views/footer.html'"></div>

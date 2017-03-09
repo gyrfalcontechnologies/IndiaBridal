@@ -1,0 +1,117 @@
+[{
+        "memberID": "IBM10000004",
+        "currPage": "uPartnerPref",
+        "userData": {
+                "locCount": [{
+                        "isOthers": "false",
+                        "value": "2"
+                }],
+                "age_LL": [{
+                        "isOthers": "false",
+                        "value": "20"
+                }],
+                "age_UL": [{
+                        "isOthers": "false",
+                        "value": "35"
+                }],
+                "height_LL": [{
+                        "isOthers": "false",
+                        "value": "166"
+                }],
+                "height_UL": [{
+                        "isOthers": "false",
+                        "value": "175"
+                }],
+                "expectation": [{
+                        "isOthers": "false",
+                        "value": "no"
+                }],
+                "weight_LL": [{
+                        "isOthers": "false",
+                        "value": "50"
+                }],
+                "weight_UL": [{
+                        "isOthers": "false",
+                        "value": "80"
+                }],
+                "income_LL": [{
+                        "isOthers": "false",
+                        "value": "2"
+                }],
+                "income_UL": [{
+                        "isOthers": "false",
+                        "value": "3"
+                }],
+                "relationShipID": [{
+                        "isOthers": "false",
+                        "value": "REL10005"
+                }],
+                "foodtypeid": [{
+                        "isOthers": "false",
+                        "value": "FOT10001"
+                }],
+                "drinker": [{
+                        "isOthers": "false",
+                        "value": "no"
+                }],
+                "smoker": [{
+                        "isOthers": "false",
+                        "value": "no"
+                }],
+                "professionID": [{
+                        "isOthers": "false",
+                        "value": "PRF10001"
+                }, {
+                        "isOthers": "false",
+                        "value": "PRF10010"
+                }],
+                "QualificationID": [{
+                        "isOthers": "false",
+                        "value": "QAL10001"
+                }],
+                "countryID1": [{
+                        "isOthers": "false",
+                        "value": "CNY10001"
+                }],
+                "StateID1": [{
+                        "isOthers": "false",
+                        "value": "STY10001"
+                }],
+                "CityID1": [{
+                        "isOthers": "false",
+                        "value": "CTY10001"
+                }],
+                "ReligionID": [{
+                        "isOthers": "false",
+                        "value": "RGN10003"
+                }],
+                "motherTongueID": [{
+                        "isOthers": "false",
+                        "value": "LAN10013"
+                }],
+                "casteID": [{
+                        "isOthers": "false",
+                        "value": "CST10004"
+                }],
+                "SubCasteID": [{
+                        "isOthers": "false",
+                        "value": "SCT10003"
+                }],
+                "dosham": [{
+                        "isOthers": "false",
+                        "value": "no"
+                }],
+                "RaasiID": [{
+                        "isOthers": "false",
+                        "value": "RSI10001"
+                }],
+                "StarID": [{
+                        "isOthers": "false",
+                        "value": "STR10001"
+                }],
+                "GothramID": [{
+                        "isOthers": "false",
+                        "value": "GOT10003"
+                }]
+        }
+}]

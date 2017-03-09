@@ -1,0 +1,22 @@
+[{
+	"memberID": "IBM10000004",
+	"currPage": "uAstroDet",
+	"userData": {
+		"dosham": {
+			"isOthers": "false",
+			"value": "No"
+		},
+		"raasi": {
+			"isOthers": "false",
+			"value": "RSI10003"
+		},
+		"star": {
+			"isOthers": "false",
+			"value": "STR10028"
+		},
+		"horoscopeLoc": {
+			"isOthers": "false",
+			"value": ""
+		}
+	}
+}]

@@ -1,0 +1,14 @@
+ [{
+ 	"memberID": "IBM10000004",
+ 	"currPage": "uNameAndPic",
+ 	"userData": {
+ 		"name": {
+ 			"isOthers": "false",
+ 			"value": "Rajesh Kankanampatti Mahesh"
+ 		},
+ 		"picStream": {
+ 			"isOthers": "false",
+ 			"value": "xyz"
+ 		}
+ 	}
+ }]

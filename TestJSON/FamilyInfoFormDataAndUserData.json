@@ -1,0 +1,84 @@
+[{
+	"isnavPageDataAvailable": "true",
+	"isAuthenticated": "true",
+	"status": "success",
+	"navPage": "familyInfo",
+	"errorMsg": "success",
+	"navPageData": {
+		"familyValue": {
+			"defaultValues": {
+				"": ""
+			},
+			"userValues": {
+				"": ""
+			}
+		},
+		"nativePlace": {
+			"defaultValues": {
+				"": ""
+			},
+			"userValues": {
+				"": ""
+			}
+		},
+		"state": {
+			"defaultValues": {},
+			"userValues": {
+				"": ""
+			}
+		},
+		"motherStatus": {
+			"defaultValues": {
+				"": ""
+			},
+			"userValues": {
+				"": ""
+			}
+		},
+		"familyStatus": {
+			"defaultValues": {
+				"": ""
+			},
+			"userValues": {
+				"": ""
+			}
+		},
+		"fatherStatus": {
+			"defaultValues": {
+				"": ""
+			},
+			"userValues": {
+				"": ""
+			}
+		},
+		"familyTypeID": {
+			"defaultValues": {
+				"": ""
+			},
+			"userValues": {
+				"": ""
+			}
+		},
+		"noOfSiblings": {
+			"defaultValues": {
+				"": ""
+			},
+			"userValues": {
+				"": ""
+			}
+		},
+		"country": {
+			"defaultValues": {},
+			"userValues": {
+				"": ""
+			}
+		},
+		"city": {
+			"defaultValues": {},
+			"userValues": {
+				"": ""
+			}
+		}
+	},
+	"memberID": "IBM10000001"
+}]

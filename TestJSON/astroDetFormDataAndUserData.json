@@ -1,0 +1,81 @@
+[{
+	"isnavPageDataAvailable": "true",
+	"isAuthenticated": "true",
+	"status": "success",
+	"navPage": "astroDet",
+	"errorMsg": "success",
+	"navPageData": {
+		"dosham": {
+			"userValues": {
+				"value": "",
+				"key": ""
+			}
+		},
+		"star": {
+			"defaultValues": {
+				"STR10019": "Moolam",
+				"STR10015": "Swaathi",
+				"STR10016": "Visaakam",
+				"STR10017": "Anusham",
+				"STR10018": "Kettai",
+				"STR10011": "Pooram",
+				"STR10012": "Uthiram",
+				"STR10013": "Hastham",
+				"STR10014": "Chithirai",
+				"STR10021": "Uthiraadam",
+				"STR10020": "Pooraadam",
+				"STR10025": "Poorattathi",
+				"STR10024": "Chathayam/Sadayam",
+				"STR10023": "Avittam",
+				"STR10022": "Thiruvonam",
+				"STR10029": "Others",
+				"STR10028": "I Don't Know",
+				"STR10027": "Revathi",
+				"STR10008": "Poosam",
+				"STR10026": "Uthirattathi",
+				"STR10009": "Aayilyam",
+				"STR10006": "Thiruvaathirai",
+				"STR10007": "Punarpoosam",
+				"STR10004": "Rohini",
+				"STR10005": "Mrigasheersham",
+				"STR10002": "Bharani",
+				"STR10003": "Karthigai",
+				"STR10001": "Aswini",
+				"STR10010": "Makam"
+			},
+			"userValues": {
+				"value": "",
+				"key": ""
+			}
+		},
+		"horLoc": {
+			"userValues": {
+				"value": "",
+				"key": ""
+			}
+		},
+		"raasi": {
+			"defaultValues": {
+				"RSI10008": "Vrischika",
+				"RSI10007": "Tula",
+				"RSI10009": "Dhanu",
+				"RSI10003": "Mithuna",
+				"RSI10004": "Karkata",
+				"RSI10014": "Others",
+				"RSI10005": "Simha",
+				"RSI10006": "Kanya",
+				"RSI10012": "Meena",
+				"RSI10013": "I Don't Know",
+				"RSI10001": "Mesha",
+				"RSI10010": "Makara",
+				"RSI10011": "Kumbha",
+				"RSI10002": "Vrishaba"
+			},
+			"userValues": {
+				"value": "",
+				"key": ""
+			}
+		}
+	},
+	"memberID": "IBM10000002"
+}]

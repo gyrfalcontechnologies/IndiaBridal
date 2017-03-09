@@ -1,0 +1,390 @@
+<style type="text/css">
+ul li {
+	list-style: none;
+}
+
+.f-activity-cont {
+	margin-top: 0px;
+	height: auto;
+	padding: 70px;
+}
+</style>
+<div class="col-lg-1 col-md-1 col-sm-1 col-xs-1"></div>
+<div
+	class="profile-activity f-activity col-lg-2 col-md-2 col-sm-2 col-xs-2">
+	<div class="prof-act-header">
+		<span><b>Activity</b></span> <span><img
+			src="images/shortList.png"></span>
+	</div>
+	<div class="faq-activity-tree">
+		<div class="tree-list"
+			ng-click="mc.enableDisableList(val.name);mc.currentTreeView=val.name"
+			ng-class="{'f-tree-active':val.isActive}"
+			ng-repeat="val in mc.activityList">
+			<a href="">{{val.name}}</a>
+		</div>
+	</div>
+</div>
+
+<div class="col-lg-9 col-md-9 col-sm-9 col-xs-9 f-activity-cont"
+	ng-init="mc.currentTreeView='FAQ\'s'" style="font-family: cambria">
+	<div class="f-faq" ng-if="mc.currentTreeView==='FAQ\'s'">
+		<ul>
+			<li class="faq-question" ng-click="mc.toggleFAQ($event)">1). Can
+				I Create Profile For Free Of Cost?</li>
+			<li class="faq-answer">&emsp;&emsp;Yes, Registering your
+				Matrimonial Profile is Free on IndiazBridal.Com
+				<hr>
+			</li>
+			<li class="faq-question" ng-click="mc.toggleFAQ($event)">2). How
+				Do I Login ?</li>
+			<li class="faq-answer">&emsp;&emsp;Visit
+				http://www.indiazbridal.com/. On the Landing Page, Click Login
+				Button and provide the Required Details for Successful Login.
+				<hr>
+			</li>
+			<li class="faq-question" ng-click="mc.toggleFAQ($event)">3). I
+				Forgot My Password, How Do I Reset?</li>
+			<li class="faq-answer">&emsp;&emsp;Visit:
+				http://www.indiazbridal.com/. Click on the "Forgot Password" Button
+				in the Login Panel. An Mail will be sent to the Registered E-mail id
+				to Recover the Password.
+				<hr>
+			</li>
+			<li class="faq-question" ng-click="mc.toggleFAQ($event)">4). How
+				Do I Change My Password ?</li>
+			<li class="faq-answer">&emsp;&emsp;Visit:
+				http://www.indiazbridal.com/ .Login Utilizing your "Profile ID /
+				E-mail Address" and "Password" . Under "My Account" Segment in the
+				Left Navigation Pane. Enter your old Password. Enter your New
+				Password and Confirm the Same. Click on "Submit" Button.
+				<hr>
+			</li>
+			<li class="faq-question" ng-click="mc.toggleFAQ($event)">5). How
+				To Get Rid of The Message "Profile Id / E-mail ID Not Found or
+				Invalid Password" ?</li>
+			<li class="faq-answer">&emsp;&emsp;The Secret word you have
+				entered may not be Right or you may be having the CAPSLOCK "On". It
+				do be Ideal if you Check whether the Secret Word is entered in the
+				Right Case (Upper or Lower). It do be Ideal if you Guarantee that
+				there are no Spaces in the Profile ID wrote. For e.g., it ought to
+				be ABC@123 Not ABC 1 2 3.
+				<hr>
+			</li>
+			<li class="faq-question" ng-click="mc.toggleFAQ($event)">6). How
+				Do I Add My Photo To My Matrimonial Profile?</li>
+			<li class="faq-answer">&emsp;&emsp;Login with proper
+				credentials, Go to My Account Page and Add Photos in the Left
+				Navigation Pane.
+				<hr>
+			</li>
+			<li class="faq-question" ng-click="mc.toggleFAQ($event)">7). Are
+				My Photographs Secure?</li>
+			<li class="faq-answer">&emsp;&emsp;Your Photographs are highly
+				Secured. At IndiazBridal.Com Viewers can only see the Photographs.
+				However they Duplicate or Download your Photographs.
+				<hr>
+			</li>
+			<li class="faq-question" ng-click="mc.toggleFAQ($event)">8). How
+				Do I Contact a Matching Profiles?</li>
+			<li class="faq-answer">&emsp;&emsp;You can show Interest on the
+				Matching Profiles by clicking the Sent Interest Button.
+				<hr>
+			</li>
+			<li class="faq-question" ng-click="mc.toggleFAQ($event)">9). How
+				Do I Acknowledge a Member, Who Has Short-Listed Me?</li>
+			<li class="faq-answer">&emsp;&emsp;Click on Short-listed you
+				Tab, To Get the List of Profiles who Short-Listed you.
+				<hr>
+			</li>
+			<li class="faq-question" ng-click="mc.toggleFAQ($event)">10).
+				How Do I Decline a Part Who Sent Interest To Me?</li>
+			<li class="faq-answer">&emsp;&emsp;If you are not Interested in
+				Profiles which are Short-Listed you, Please Ignore it.
+				<hr>
+			</li>
+			<li class="faq-question" ng-click="mc.toggleFAQ($event)">11).
+				How Do I Send My Contact Information To The Profiles?</li>
+			<li class="faq-answer">&emsp;&emsp;As a Premium Member, You can
+				Send Customized Messages with your Contact Data, Each Time you
+				Contact, Acknowledge or Decrease a Part.
+				<hr>
+			</li>
+			<li class="faq-question" ng-click="mc.toggleFAQ($event)">12).
+				What Are The Advantages of Turning Into a Premium Member?</li>
+			<li class="faq-answer">&emsp;&emsp;The Advantages of Premium
+				Member is the Profile Validity and Get More Visibility.
+				<hr>
+			</li>
+			<li class="faq-question" ng-click="mc.toggleFAQ($event)">13).
+				How Do I Move Up To a Premium Member?</li>
+			<li class="faq-answer">&emsp;&emsp;Upgrade your Free Membership
+				to Premium Members Like Gold or Platinum.
+				<hr>
+			</li>
+			<li class="faq-question" ng-click="mc.toggleFAQ($event)">14). Is
+				Online Installment Secure On IndiazBridal.Com?</li>
+			<li class="faq-answer">&emsp;&emsp;Yes, the Online Payment is
+				Highly Secured in IndiazBridal.com . We Don't Save your Card
+				Details.
+				<hr>
+			</li>
+		</ul>
+
+	</div>
+	<div class="f-faq" ng-if="mc.currentTreeView==='Registration / Login'">
+		<ul>
+			<li class="faq-question" ng-click="mc.toggleFAQ($event)">1. How
+				Do I Login?</li>
+			<li class="faq-answer">&emsp;&emsp;Click Login Button on the Top
+				Right Corner in the Home Page.Enter the Login Name / E-Mail ID with
+				Correct Password for Successful Login.
+				<hr>
+			</li>
+			<li class="faq-question" ng-click="mc.toggleFAQ($event)">2. How
+				Do I Register?</li>
+			<li class="faq-answer">&emsp;&emsp; Enter The Below Details to
+				Register with IndiazBridal<br> &emsp;&emsp; a). Email<br>
+				&emsp;&emsp; b). Password<br> &emsp;&emsp; c). Profile Created
+				By<br> &emsp;&emsp; d). Name<br> &emsp;&emsp; e). Gender<br>
+				&emsp;&emsp; f). Date of Birth<br> &emsp;&emsp; g). Mobile
+				Number<br> &emsp;&emsp; h). Caste and Mother-Tongue<br>
+				&emsp;&emsp; i). Click Register Button.
+				<hr>
+			</li>
+		</ul>
+	</div>
+	<div class="f-faq" ng-if="mc.currentTreeView==='Profile Management'">
+		<ul>
+			<li class="faq-question" ng-click="mc.toggleFAQ($event)">1. How
+				Do I Change My Profile Picture?</li>
+			<li class="faq-answer">&emsp;&emsp; a). Login to
+				IndiazBridal.Com, You can see the Profile Picture on the Left Side.<br>
+				&emsp;&emsp; b). Click Edit Button to open the Profile Settings
+				Page. <br> &emsp;&emsp; c). Click Change Profile Picture
+				Button, to Update your Profile Picture.
+				<hr>
+			</li>
+			<li class="faq-question" ng-click="mc.toggleFAQ($event)">2. How
+				Do I Change My Profile Details?</li>
+			<li class="faq-answer">&emsp;&emsp; a). Login to IndiazBridal. <br>
+				&emsp;&emsp; b). Click Edit Button to Navigate to Profile Management
+				Page above Profile Picture. <br> &emsp;&emsp; c). Click on
+				Respective tabs to Modify your Details, Then Save and Continue.
+				<hr>
+			</li>
+			<li class="faq-question" ng-click="mc.toggleFAQ($event)">3. How
+				Do I Change My Partner Preference?</li>
+			<li class="faq-answer">&emsp;&emsp; a). Login to IndiazBridal. <br>
+				&emsp;&emsp; b). Click Edit Button to Navigate to Profile Management
+				Page above Profile Picture. <br> &emsp;&emsp; c). Click Partner
+				Preference tab to Edit your Partner Preference.
+				<hr>
+			</li>
+			<li class="faq-question" ng-click="mc.toggleFAQ($event)">4. How
+				Do I Change My Basic Info?</li>
+			<li class="faq-answer">&emsp;&emsp; a). Login to IndiazBridal. <br>
+				&emsp;&emsp; b). Click Edit Button to Navigate to Profile Management
+				Page above Profile Picture. <br> &emsp;&emsp; c). Click Partner
+				Preference tab to Edit your Partner Preference.
+				<hr>
+			</li>
+			<li class="faq-question" ng-click="mc.toggleFAQ($event)">5. How
+				Do I Change My Religious Info?</li>
+			<li class="faq-answer">&emsp;&emsp; a). Login to IndiazBridal. <br>
+				&emsp;&emsp; b). Click Edit Button to Navigate to Profile Management
+				Page above Profile Picture. <br> &emsp;&emsp; c). Click
+				Religious Info tab to Edit your Religious Details.
+				<hr>
+			</li>
+			<li class="faq-question" ng-click="mc.toggleFAQ($event)">6. How
+				Do I Change My Family Info?</li>
+			<li class="faq-answer">&emsp;&emsp; a). Login to IndiazBridal. <br>
+				&emsp;&emsp; b). Click Edit Button to Navigate to Profile Management
+				Page above Profile Picture. <br> &emsp;&emsp; c). Click Family
+				Info tab to Edit your Family Details.
+				<hr>
+			</li>
+			<li class="faq-question" ng-click="mc.toggleFAQ($event)">7. How
+				Do I Change My Education and Career Details?</li>
+			<li class="faq-answer">&emsp;&emsp; a). Login to IndiazBridal. <br>
+				&emsp;&emsp; b). Click Edit Button to Navigate to Profile Management
+				Page above Profile Picture.<br> &emsp;&emsp; c). Click
+				Education and Career tab to Edit your Education and Career Details.
+				<hr>
+			</li>
+			<li class="faq-question" ng-click="mc.toggleFAQ($event)">8. How
+				Do I Change My Life Style?</li>
+			<li class="faq-answer">&emsp;&emsp; a). Login to IndiazBridal. <br>
+				&emsp;&emsp; b). Click Edit Button to Navigate to Profile Management
+				Page above Profile Picture.<br> &emsp;&emsp; c). Click Life
+				Style tab to Edit your Life Style Details.
+				<hr>
+			</li>
+		</ul>
+	</div>
+	<div class="f-faq" ng-if="mc.currentTreeView==='Search'">
+		<ul>
+			<li class="faq-question" ng-click="mc.toggleFAQ($event)">1.
+				Where Do I Search the Profile Globally?</li>
+			<li class="faq-answer">&emsp;&emsp; Enter the Profile Id, Name
+				in the Search Box Near Login Button.
+				<hr>
+			</li>
+			<li class="faq-question" ng-click="mc.toggleFAQ($event)">2.
+				Where Do I Search Profiles Based on the Caste, Religion Etc.</li>
+			<li class="faq-answer">&emsp;&emsp; a). Login to IndiazBridal. <br>
+				&emsp;&emsp; b). Click View Profile to List all the Profiles.<br>
+				&emsp;&emsp; c). Apply Required Filter in the Left Navigation Pane
+				to Identify your Better-Half. For Ex, Profile-Type, Religion,
+				Community Etc.
+				<hr>
+			</li>
+			<li class="faq-question" ng-click="mc.toggleFAQ($event)">3.
+				Where Do I Search My Matching Profile?</li>
+			<li class="faq-answer">&emsp;&emsp; a). Login to IndiazBridal. <br>
+				&emsp;&emsp; b). Click Matches to List the Profiles Based on your
+				Expectation.<br> &emsp;&emsp; c). Apply Required Filter in the
+				Left Navigation Pane to Identify your Better-Half. For ex, profile
+				type, religion, community etc.
+				<hr>
+			</li>
+			<li class="faq-question" ng-click="mc.toggleFAQ($event)">4.
+				Where Do I Search Short-Listed Profiles?</li>
+			<li class="faq-answer">&emsp;&emsp; a). Login to IndiazBridal. <br>
+				&emsp;&emsp; b). Click Shortlists to List all the Shortlisted
+				Profiles.<br> &emsp;&emsp; c). Apply Required Filter in the
+				Left Navigation Pane to Identify your Better-Half. For ex, profile
+				type, religion, community etc.
+				<hr>
+			</li>
+
+		</ul>
+	</div>
+	<div class="f-faq" ng-if="mc.currentTreeView==='Membership'">
+		<ul>
+			<li class="faq-question" ng-click="mc.toggleFAQ($event)">1. What
+				Are the Type of Memberships Are Available?</li>
+			<li class="faq-answer">&emsp;&emsp; The Memberships Types are
+				Gold and Platinum.<br> &emsp;&emsp; <b>Gold:</b> Temporary
+				Membership which is Valid for 3 Months.<br> &emsp;&emsp; <b>Platinum:</b>
+				Permanent Membership which is Valid for a Year.
+				<hr>
+			</li>
+			<li class="faq-question" ng-click="mc.toggleFAQ($event)">2. What
+				is the Benefit of Gold Membership?</li>
+			<li class="faq-answer">&emsp;&emsp; a). Gold Member can access
+				all the Profiles in the Database to Meet His/Her Dream Life Partner.<br>
+				&emsp;&emsp; b). The Access Level will be limited to display 30
+				Mobile Numbers and the Membership Validity for 3 Months.
+				<hr>
+			</li>
+			<li class="faq-question" ng-click="mc.toggleFAQ($event)">3. What
+				is the Benefit of Platinum Membership?</li>
+			<li class="faq-answer">&emsp;&emsp; a). Platinum Member can
+				Access all the Profiles in the Database to Meet His/Her Dream Life
+				Partner.<br> &emsp;&emsp; b). The Access Level will be Limited
+				to Display 50 Mobile Numbers and the Membership Validity for a Year.
+				<hr>
+			</li>
+		</ul>
+	</div>
+	<div class="f-faq" ng-if="mc.currentTreeView==='Block & Revert'">
+		<ul>
+			<li class="faq-question" ng-click="mc.toggleFAQ($event)">1. How
+				Do I Short-List the Profile?</li>
+			<li class="faq-answer">&emsp;&emsp; a). Login to IndiazBridal.<br>
+				&emsp;&emsp; b). Identify the Suitable Profile as per Your
+				Preference, and Click Short-List Button in Profile Details Page.
+				<hr>
+			</li>
+			<li class="faq-question" ng-click="mc.toggleFAQ($event)">2. How
+				Do I Connect With the Suitable Profile?</li>
+			<li class="faq-answer">&emsp;&emsp; a). Login to IndiazBridal.<br>
+				&emsp;&emsp; b). Identify the Suitable Profile as per Your
+				Preference, and Click Connect in The Profile Listing Page.
+				<hr>
+			</li>
+			<li class="faq-question" ng-click="mc.toggleFAQ($event)">3. How
+				Do I Send Interest to the Matching Profile?</li>
+			<li class="faq-answer">&emsp;&emsp; a). Login to IndiazBridal.<br>
+				&emsp;&emsp; b). Identify the Suitable Profile as per Your
+				Preference, and Click Send Request in Profile Details Page.
+				<hr>
+			</li>
+			<li class="faq-question" ng-click="mc.toggleFAQ($event)">4. How
+				Do I Send Mail to the Matching Profile?</li>
+			<li class="faq-answer">&emsp;&emsp; a). Login to IndiazBridal.<br>
+				&emsp;&emsp; b). Identify the Suitable Profile as per your
+				Preference, and Click Mail Her Button in Profile Details and Profile
+				Listing Page.
+				<hr>
+			</li>
+		</ul>
+	</div>
+	<div class="f-faq" ng-if="mc.currentTreeView==='Chat'">
+		<ul>
+			<li class="faq-question" ng-click="mc.toggleFAQ($event)">1. How
+				Do I Chat With the Profile?</li>
+			<li class="faq-answer">&emsp;&emsp; a). Login to IndiazBridal.<br>
+				&emsp;&emsp; b). Identify the Suitable Profile as per Your
+				Preference, and Click Chat Button in Profile Details and Profile
+				Listing Page to Speak with your Life Partner
+				<hr>
+			</li>
+			<li class="faq-question" ng-click="mc.toggleFAQ($event)">2. How
+				Do I Chat With Customer Support Executive?</li>
+			<li class="faq-answer">&emsp;&emsp; a). Login to IndiazBridal.<br>
+				&emsp;&emsp; b). On the Left Bottom Navigation Pane, Separate Chat
+				Window is Provided to Chat with Customer Support Executives.
+				<hr>
+			</li>
+			<li class="faq-question" ng-click="mc.toggleFAQ($event)">3. How
+				Do I Chat With the Member Online?</li>
+			<li class="faq-answer">&emsp;&emsp; a). Login to IndiazBridal.<br>
+				&emsp;&emsp; b). On the Right Bottom Navigation Pane, Separate Chat
+				Window is Provided to Chat with the Members who are all On-Line.
+				<hr>
+			</li>
+		</ul>
+	</div>
+	<div class="f-faq" ng-if="mc.currentTreeView==='Payment Option'">
+		<ul>
+			<li class="faq-question" ng-click="mc.toggleFAQ($event)">1. what
+				are all the Payment Options Available?</li>
+			<li class="faq-answer">&emsp;&emsp; a). Currently, We have
+				Integrated With Payumoney for the Payment Needs.<br>
+				&emsp;&emsp; b). Please Navigate to Payment Page and Subscribe the
+				Suitable Plans to Make the Payment.
+				<hr>
+			</li>
+			<li class="faq-question" ng-click="mc.toggleFAQ($event)">2. Can
+				We Expect New Payment Service in Future?</li>
+			<li class="faq-answer">&emsp;&emsp; Yes Sure, We are Working On
+				With Various Payment Service Providers to Integrate with our
+				Website.
+				<hr>
+			</li>
+		</ul>
+	</div>
+	<div class="f-faq" ng-if="mc.currentTreeView==='Technical Issues'">
+		<ul>
+			<li class="faq-question" ng-click="mc.toggleFAQ($event)">1. How
+				Do I Resolve Any Technical Issues?</li>
+			<li class="faq-answer">&emsp;&emsp; Please Check FAQ's to
+				Resolve Any Issues On Your Own.
+				<hr>
+			</li>
+			<li class="faq-question" ng-click="mc.toggleFAQ($event)">2. What
+				Should I Do If Unable to Recover the Technical Issue?</li>
+			<li class="faq-answer">&emsp;&emsp; a). Please Contact Customer
+				Care Executives through Chat/Call.<br> &emsp;&emsp; b). For
+				Direct Contact, Please Click Support Button on the Top Right Corner
+				on The Page.<br> &emsp;&emsp; c). Else, Send the Queries to the
+				Agent From Contact Us Page.
+				<hr>
+			</li>
+		</ul>
+	</div>
+</div>
+<div ng-include src="'views/footer.html'"></div>
