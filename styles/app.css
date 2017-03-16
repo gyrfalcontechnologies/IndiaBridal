@@ -110,18 +110,21 @@ html, body {
 	padding-top: 20px;
 }
 
-.carousal, .register {
+.carousal {
 	width: 50%;
 	height: 100%;
 	float: left;
 }
 
+.register{
+	position: relative;
+}
 .reg-form {
 	/*background: #F8F8FF;*/
 	background: rgba(240, 230, 140, 0.58);
 	border-radius: 10px;
-	float: right;
-	margin: 0px 55px 0 200px;
+	/* float: right;
+	margin: 0px 55px 0 200px; */
 }
 
 .reg-form input, .reg-form select, .reg-form input[type="text"],
@@ -816,6 +819,7 @@ pointer
 
 .min-banner-app-download {
 	margin-top: -20px !important;
+	transition: margin-top 1s;
 }
 
 .min-top-banner-menu {
@@ -2083,8 +2087,8 @@ tab-content {
 		float: left;
 	}
 	.reg-form {
-		margin-left: 50px !important;
-		float: left;
+		/* margin-left: 50px !important;
+		float: left; */
 	}
 }
 
@@ -2109,7 +2113,7 @@ tab-content {
 
 @media ( max-width : 1200px) {
 	.reg-form {
-		margin-left: 150px;
+		//margin-left: 150px;
 	}
 }
 
@@ -2124,7 +2128,7 @@ tab-content {
 		width: 150px;
 	}
 	.reg-form {
-		margin-left: -25px !important;
+		//margin-left: -25px !important;
 	}
 }
 
@@ -2149,8 +2153,8 @@ tab-content {
 		margin-left: -12px;
 	}
 	.reg-form {
-		margin-left: -132px !important;
-		width: 300px !important;
+		/* margin-left: -132px !important;
+		width: 300px !important; */
 	}
 }
 
@@ -2184,7 +2188,7 @@ tab-content {
 		margin-left: 10px;
 	}
 	.register-xs .reg-form {
-		margin-left: 45% !important;
+		/* margin-left: 45% !important; */
 		width: 320px;
 		float: left !important;
 		margin-bottom: 5px;
@@ -2218,11 +2222,11 @@ tab-content {
 
 @media ( max-width : 500px) {
 	.register-xs .reg-form {
-		margin-left: 20% !important;
+		//margin-left: 20% !important;
 	}
 	@media ( max-width : 400px) {
 		.register-xs .reg-form {
-			margin-left: 12% !important;
+			//margin-left: 12% !important;
 		}
 		@media ( max-width : 1125px) {
 			.portfolio img {
@@ -2234,3 +2238,111 @@ tab-content {
 		}
 	}
 }
+
+/****************home page******************/
+
+.gender-radio-wrapper{
+	width: 245px;
+}
+
+.gender-radio-wrapper .radio-inline{
+	width: 49%;
+    padding: 0 !important;
+    margin: 0 !important;
+}
+
+.nav-options{
+		display: none;
+	}
+
+/* responsive for mobile devices*/
+@media (min-width:280px) and (max-width : 350px){
+	.better-half-search .search-options{
+	padding: 0px !important;
+	}
+	
+	.col-xs-1, .col-sm-1, .col-md-1, .col-lg-1, .col-xs-2, .col-sm-2, .col-md-2, .col-lg-2, .col-xs-3, .col-sm-3, .col-md-3, .col-lg-3, .col-xs-4, .col-sm-4, .col-md-4, .col-lg-4, .col-xs-5, .col-sm-5, .col-md-5, .col-lg-5, .col-xs-6, .col-sm-6, .col-md-6, .col-lg-6, .col-xs-7, .col-sm-7, .col-md-7, .col-lg-7, .col-xs-8, .col-sm-8, .col-md-8, .col-lg-8, .col-xs-9, .col-sm-9, .col-md-9, .col-lg-9, .col-xs-10, .col-sm-10, .col-md-10, .col-lg-10, .col-xs-11, .col-sm-11, .col-md-11, .col-lg-11, .col-xs-12, .col-sm-12, .col-md-12, .col-lg-12{
+		padding: 0px;
+	}
+}
+
+@media (min-width:280px) and (max-width : 480px){
+	.reg-form-wrapper{
+		width: 300px;
+		margin: 0 auto;
+	}
+	.reg-form{
+		width:300px;
+		margin: 0 auto;
+	}
+	
+	.about-list{
+		padding: 10px 0 0 13px;
+	}
+	
+	.in-view .portfolio{
+		padding-top: 10px;
+	}
+	
+	.footer-col{
+		width:100%;
+	}
+	
+}
+
+@media (min-width:481px) and (max-width : 767px){
+	.reg-form-wrapper{
+		width: 300px;
+		margin: 0 auto;
+	}
+	.reg-form{
+		width:300px;
+		margin: 0 auto;
+	}
+	
+	.footer-col{
+		width:100%;
+	}
+	
+}
+
+@media (min-width:768px) and (max-width : 1024px){
+	.reg-form-wrapper{
+		width: 300px;
+		float: right;
+    margin-right: 30px;
+	}
+	.reg-form{
+		width:300px;
+		
+	}
+	
+	.footer-col{
+		width:33%;
+	}
+	
+}
+
+@media (min-width:1025px) {
+.reg-form-wrapper{
+		width: 300px;
+		float: right;
+    margin-right: 90px;
+	}
+	.reg-form{
+		width:300px;
+		
+	}
+	
+	.footer-col{
+		width:33%;
+	}
+}
+
+@media(min-width: 1200px){
+	.nav-options{
+		display: block;
+	}
+}
+
+
