@@ -1,2 +1,0 @@
-# IndiaBridal
-Project
