@@ -1,0 +1,22 @@
+[{
+	"memberID": "IBM10000004",
+	"currPage": "uEduAndCar",
+	"userData": {
+		"education": {
+			"isOthers": "false",
+			"value": "QAL10014"
+		},
+		"profession": {
+			"isOthers": "false",
+			"value": "PRF10006"
+		},
+		"annualIncome_LL": {
+			"isOthers": "false",
+			"value": "2"
+		},
+		"annualIncome_UL": {
+			"isOthers": "false",
+			"value": "5"
+		}
+	}
+}]

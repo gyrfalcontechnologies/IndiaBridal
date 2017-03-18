@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://java.sun.com/xml/ns/javaee" xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd" version="2.5">
+  <display-name>indiazbridal</display-name>
+  <welcome-file-list>
+    <welcome-file>index.html</welcome-file>
+    <welcome-file>index.htm</welcome-file>
+    <welcome-file>index.jsp</welcome-file>
+    <welcome-file>default.html</welcome-file>
+    <welcome-file>default.htm</welcome-file>
+    <welcome-file>default.jsp</welcome-file>
+  </welcome-file-list>
+ 
+ <servlet>  
+<servlet-name>myServlet</servlet-name>  
+<servlet-class>myServlet</servlet-class>  
+</servlet>  
+  
+<servlet-mapping>  
+<servlet-name>myServlet</servlet-name>  
+<url-pattern>/myServlet</url-pattern>  
+</servlet-mapping>  
+  
+  <servlet>
+    <description></description>
+    <display-name>UserActionCommand</display-name>
+    <servlet-name>UserActionCommand</servlet-name>
+    <servlet-class>in.indiaBridal.servlets.UserActionCommand</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>UserActionCommand</servlet-name>
+    <url-pattern>/UserActionCommand</url-pattern>
+  </servlet-mapping>
+
+  <servlet>
+    <description></description>
+    <display-name>ForgotPasswordActionCommand</display-name>
+    <servlet-name>ForgotPasswordActionCommand</servlet-name>
+    <servlet-class>in.indiaBridal.servlets.ForgotPasswordActionCommand</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>ForgotPasswordActionCommand</servlet-name>
+    <url-pattern>/ForgotPassword</url-pattern>
+  </servlet-mapping>
+
+  <servlet>
+    <description></description>
+    <display-name>AccountActivateCommand</display-name>
+    <servlet-name>AccountActivateCommand</servlet-name>
+    <servlet-class>in.indiaBridal.servlets.AccountActivateCommand</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>AccountActivateCommand</servlet-name>
+    <url-pattern>/AccountActivate</url-pattern>
+  </servlet-mapping>
+</web-app>

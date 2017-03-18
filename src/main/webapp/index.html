@@ -1,0 +1,197 @@
+<html>
+<head>
+
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="width=device-width, height=device-height, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0">
+<meta charset="utf-8" />
+<meta http-equiv="Cache-control" content="public">
+<meta name="description" content="progressbar" />
+<meta name="author" content="" />
+<meta name="format-detection" content="telephone=no" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+<meta name='HandheldFriendly' content='True'/>
+<meta name='MobileOptimized' content='320'/>
+<meta name="apple-mobile-web-app-capable" content="yes" />
+<meta name="apple-mobile-web-app-status-bar-style" content="black" />
+<title>IndiazBridal</title>
+
+<link rel="shortcut icon" type="image/png" href="images/crown.png">
+<link rel="stylesheet" type="text/css" href="styles/app.css">
+<link rel="stylesheet" type="text/css" href="styles/bootstrap.css">
+
+<script type="text/javascript" src="scripts/angular.js"></script>
+<script type="text/javascript" src="scripts/angular-md5.js"></script>
+<script type="text/javascript" src="scripts/angular-cookies.js"></script>
+<script type="text/javascript" src="scripts/angular-route.min.js"></script>
+<script type="text/javascript" src="scripts/jquery.js"></script>
+<script type="text/javascript" src="scripts/bootstrap.min.js"></script>
+<script type="text/javascript" src="scripts/underscore.js"></script>
+<script type="text/javascript" src="scripts/ui-bootstrap.js"></script>
+<script type="text/javascript"
+	src="scripts/ui-bootstrap-tpls-0.14.2.min.js"></script>
+<script type="text/javascript" src="app.js"></script>
+<script type="text/javascript"
+	src="scripts/services/loggedUserService.js"></script>
+<script type="text/javascript"
+	src="scripts/controllers/homeController.js"></script>
+<script type="text/javascript"
+	src="scripts/controllers/userProfileController.js"></script>
+<script type="text/javascript"
+	src="scripts/controllers/memberInfoController.js"></script>
+<script type="text/javascript"
+	src="scripts/controllers/searchResultController.js"></script>
+<script type="text/javascript"
+	src="scripts/controllers/profileEditController.js"></script>
+<script type="text/javascript"
+	src="scripts/controllers/memberShipController.js"></script>
+<script type="text/javascript">var switchTo5x=true;</script>
+
+
+<script type="text/javascript" src="scripts/controllers/map.js"></script>
+<script>
+			$(document).ready(function(){
+			    $('[data-toggle="tooltip"]').tooltip(); 
+			});
+		</script>
+<script>
+function myFunction() {
+   alert( "An E-mail sent to your registered mail id. Check Mail for more info");
+}
+</script>
+</head>
+<body ng-app="IndiaBridal" ng-controller="mainAppCtrl as mc">
+	<div class="social-panel">
+		<img src="images/footer-link-img1.png"><br> <img
+			src="images/footer-link-img2.png"><br> <img
+			src="images/footer-link-img3.png"><br> <img
+			src="images/footer-link-img4.png"><br> <img
+			src="images/footer-link-img5.png"><br>
+		<button id="panel-collapse" ng-click="mc.toggleSocial()">&laquo;</button>
+	</div>
+	<!-- <div class="chat-list"> -->
+	<div class="top-banner-view" ng-include src="'views/top-banner.html'"></div>
+	<div class="app-view">
+		<div class="partials" ng-view></div>
+	</div>
+	<div ng-show="true" class="chat"
+		ng-if="mc.isProfile&&!mc.isFooter&&mc.isLogged">
+		<div class="chat-header" ng-click="mc.toggleChat()">Chat with
+			Members ({{mc.currentUserProfileInfo["members-available"].length}})</div>
+		<div class="chat-list">
+			<div
+				ng-repeat="mem in mc.currentUserProfileInfo['members-available']"
+				class="users">
+				<div style="float: left">
+					<img src="images/female-user.png">&emsp;{{mem.name}}
+				</div>
+				<div style="float: right">
+					<div ng-class="mem.isOnline? 'member-online':'member-offline'"></div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div ng-show="true" class="admin-chat"
+		ng-if="mc.isProfile&&!mc.isFooter&&mc.isLogged">
+		<div class="admin-chat-header" ng-click="mc.toggleAdminChat()">We
+			Are Here To Help You</div>
+		<div class="chat-list"></div>
+	</div>
+
+
+	<div id="login-modal" class="modal fade" role="dialog">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-body">
+					<form id="login-form" ng-submit="mc.logUser()">
+						<table class="login-table">
+							<tr>
+								<td><img src="images/logo-login.png"></td>
+							</tr>
+							<tr>
+								<td><h2>Login</h2></td>
+							</tr>
+							<tr>
+								<td><input ng-model="mc.uName" type="text"
+									placeholder="Username" required></td>
+							</tr>
+							<tr>
+								<td><input ng-model="mc.pwd" type="password"
+									placeholder="Password" maxlength="10" required></td>
+							</tr>
+
+
+							<tr>
+								<td><button class="btn" type="submit">Login</button>
+									<button class="btn" type="reset"
+										onclick="window.location = 'index.html' " onclick="something">Cancel</button>
+									<!--	<button class="btn" type="button" data-dismiss="modal" > Cancel </button></td></tr>     -->
+							<tr ng-if="!mc.isAuthProcessed">
+								<td style="color: #fff">Authentication in Progress...<span
+									class="glyphicon glyphicon-repeat glyphicon-repeat-custom"></span></td>
+							</tr>
+							<tr>
+								<td><span><a href="" onclick="myFunction()">Forget
+											Password?</a></span></td>
+							</tr>
+							<!----- <tr ng-init="mc.isLogged=true" ng-if="!mc.isLogged="><td style="color:white">*Invalid Username / Password &emsp; <a href="">Forgot Password?</a></td></tr>--->
+							<tr>
+								<td><span>Not a Member?</span>&emsp;<span><a
+										href="#">Sign Up</a></span></td>
+							</tr>
+
+						</table>
+					</form>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<div id="reg-succs-modal" class="modal fade" role="dialog">
+		<div class="modal-dialog" style="margin-top: 20% !important;">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal">&times;</button>
+			</div>
+			<div class="modal-content"
+				style="background: rgba(220, 215, 146, 0.93) !important;">
+				<div class="modal-body">{{mc.$rootScope.registrStatus}}</div>
+			</div>
+		</div>
+	</div>
+
+
+	<!-- <div class="footer-view" ng-include src="'views/footer.html'"></div> -->
+</body>
+<script type="text/javascript" src="/scripts/controllers/button.js"></script>
+<script type="text/javascript" src="/scripts/controllers/loader.js"></script>
+<script type="text/javascript">stLight.options({publisher: "ebbeef74-5620-4adc-8f90-a130c48416c6", doNotHash: false, doNotCopy: false, hashAddressBar: false});</script>
+<script>
+var options={ "publisher": "ebbeef74-5620-4adc-8f90-a130c48416c6", "position": "left", "ad": { "visible": false, "openDelay": 5, "closeDelay": 0}, "chicklets": { "items": ["facebook", "twitter", "linkedin", "pinterest", "email", "sharethis"]}};
+var st_hover_widget = new sharethis.widgets.hoverbuttons(options);
+</script>
+<style>
+.glyphicon-repeat-custom {
+	-webkit-animation: spin .7s infinite linear;
+	font-size: 45px;
+	color: rgba(183, 113, 51, 0.51) !important;
+	font-size: 65px;
+	position: absolute;
+	top: 135px;
+	margin: 0px !important;
+	left: 139px;
+	background: rgba(255, 165, 0, 0.24);
+	border-radius: 137px;
+}
+
+@
+-webkit-keyframes spin {from { -webkit-transform:rotate(0deg);
+	
+}
+
+to {
+	-webkit-transform: rotate(360deg);
+}
+}
+class
+</style>
+
+</html>

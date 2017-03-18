@@ -1,0 +1,30 @@
+[{
+	"isnavPageDataAvailable": "true",
+	"isPrefUpdated": "true",
+	"status": "success",
+	"errorMsg": "success",
+	"navPageData": {
+		"featuredProf": {
+			"matchedBasicProfData": {
+				"match0": {
+					"religion": "Hindu",
+					"height": "160",
+					"isPremiumMember": "yes",
+					"weight": "55",
+					"relationShip": "Single ",
+					"income": "4 - 4",
+					"age": "25",
+					"profession": "Engineers - IT",
+					"star": "Mrigasheersham",
+					"userPics": "",
+					"gender": "female",
+					"caste": "Naidu",
+					"fullName": "RAJESH K M",
+					"memberID": "IBM10000002",
+					"raasi": "Mithuna"
+				}
+			},
+			"totalProfiles": "1"
+		}
+	}
+}]

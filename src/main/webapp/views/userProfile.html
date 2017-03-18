@@ -1,0 +1,547 @@
+<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 nav-info">
+	Home >&nbsp; {{upc.$rootScope.activeNav}}</div>
+<div class="profile-content">
+	<div class="col-lg-2 col-md-2 col-sm-2 col-xs-2" style="width: 150px;">
+		<div class="profile-info">
+			<span> Edit <a href="#profile/edit"
+				ng-click="upc.$rootScope.activeNav='Edit Personal Info'"><img
+					src="images/settings-cog.png"></a></span>
+			<div class="user-pic">
+				<img ng-if="upc.currentUserProfPic===''" src="images/user-img.png">
+				<img class="prof-upload-image" ng-if="upc.currentUserProfPic!=''"
+					ng-src="{{upc.currentUserProfPic}}">
+			</div>
+			<div class="user-info">
+				<h4>
+					<b>{{upc.currentUserProfileInfo.name}}</b>
+				</h4>
+				{{upc.currentUserProfileInfo.status}}
+			</div>
+			<div class="profile-progress"
+				style="width: {{upc.currentUserProfileInfo.progress===100? 90: upc.currentUserProfileInfo.progress"></div>
+			<div class="profile-percent">{{upc.currentUserProfileInfo.progress}}%</div>
+			<!-- <div class="user-contact-status">
+				<img src="images/user-contact1.png">
+				<img src="images/user-contact2.png">
+				<img src="images/user-contact3.png">
+				<img src="images/user-prof-percent.png">
+			</div> -->
+		</div>
+		<!-- <div class="profile-activity"> 
+			<div class="prof-act-header">
+				<span><b>Activity</b></span>
+				<span><img src="images/shortList.png"></span>
+			</div>
+			<div class="activity-tree">
+				<div class="tree-list" ng-class="{'f-tree-active' : val.isActive&&upc.$rootScope.activeNav.indexOf('Inbox')>-1}" ng-repeat="val in upc.activityList" ng-click="upc.setInboxMessageItem(val)"><a href="#inbox">{{val.name}} ({{upc.currentUserProfileInfo[val.mapper].length}})</a></div>
+			</div>
+		</div>	 -->
+	</div>
+	<div
+		ng-init="upc.currentInboxItem = upc.currentUserProfileInfo['invitations'];upc.deactivateActiveList();upc.currentInboxItemLength = upc.currentInboxItem.length;"
+		class="col-lg-8 col-md-8 col-sm-8 col-xs-8 inbox-cont"
+		ng-if="upc.$rootScope.activeNav.indexOf('Inbox')>-1">
+		<h4>Messages ({{upc.currentInboxItemLength}})</h4>
+		<table class="col-lg-12">
+			<thead>
+				<tr>
+					<th colspan=3 ng-if="!upc.showInboxContent"><span><input
+							type="checkbox" ng-model="upc.isAllChecked"
+							ng-click="upc.enableDisable(upc.isAllChecked)">&emsp;</span> <span
+						ng-click="upc.deleteMessage()"><img src="images/trash.png">&nbsp;Delete</span>
+						<span ng-click="upc.changeReadStatus(true)"><img
+							src="images/read.png">&nbsp;Mark as Read</span> <span
+						ng-click="upc.changeReadStatus(false)"><img
+							src="images/unread.png">&nbsp;Mark as Unread</span></th>
+					<th colspan=3 ng-if="upc.showInboxContent"><span ng-hide=true></span>
+						<span ng-click="upc.showHideList([], true, false)"><img
+							src="images/back.png">&nbsp;Back</span></th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr ng-if="item.showMail&&!upc.showInboxContent"
+					ng-repeat="item in upc.currentInboxItem"
+					ng-class="{'mail-unread':!item.isRead}">
+					<td><input id="inner-check" ng-class="item.memberId"
+						type="checkbox" ng-click="upc.checkLength()"></td>
+					<td ng-click="upc.showHideList(item, false, true)"><label>{{item.name}}</label>&emsp;&emsp;&emsp;{{item.subject}}
+						<label class="pull-right">{{item.date}}</label></td>
+				</tr>
+				<tr ng-if="upc.currentInboxItem.length===0">
+					<td style="text-align: center" colspan=3>No Mails Found ..</td>
+				</tr>
+				<tr
+					ng-if="upc.showInboxContent && (upc.$rootScope.activeNav==='Inbox > Invitations' || upc.$rootScope.activeNav==='Inbox > Request Sent')"
+					class="view-cont">
+					<td colspan=3><label> <font
+							ng-if="upc.$rootScope.activeNav==='Inbox > Invitations'">From
+						</font> <font ng-if="upc.$rootScope.activeNav==='Inbox > Request Sent'">To
+						</font>
+					</label>:&emsp;&emsp;&emsp;{{upc.currentMsgItem.name}} (<a
+						href="#member-info" stlye="display:block"
+						ng-click="upc.setCurrentMember(upc.currentMsgItem.displayId)">{{upc.currentMsgItem.displayId}})</a><br>
+						<label> <font
+							ng-if="upc.$rootScope.activeNav==='Inbox > Invitations'">Subject
+						</font> <font ng-if="upc.$rootScope.activeNav==='Inbox > Request Sent'">Status
+						</font>
+					</label>:&emsp;&emsp;&emsp;{{upc.currentMsgItem.subject}} <br> <label>Message
+					</label>:<br>
+						<p>{{upc.currentMsgItem.message}}</p> <br>
+					<br> <textarea ng-init="upc.replyMsg=''"
+							ng-model="upc.replyMsg" class="col-lg-12"
+							placeholder="Send in your message to {{upc.currentMsgItem.name}} ..."></textarea>
+						<button ng-click="upc.replyMsg=''"
+							ng-disabled="upc.replyMsg.length===0" class="pull-right">Cancel</button>
+						<button ng-click="upc.replyMsg=''"
+							ng-disabled="upc.replyMsg.length===0" class="pull-right">Send</button>
+					</td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+	<div ng-if="upc.showLoader" class="laoder-container">
+		<br> <br> <br> <span
+			class="glyphicon glyphicon-repeat glyphicon-repeat-animate"></span><br>
+		<br> Fetching the latest data..
+	</div>
+
+	<div class="col-lg-8 col-md-8 col-sm-8 col-xs-8">
+		<!-- ng-if="upc.$rootScope.activeNav===''" -->
+		<div ng-if="!upc.showLoader">
+			<div class="user-result">
+				<h4 class="header">{{upc.currentUserProfileInfo["featured"].title}}
+					({{upc.currentUserProfileInfo['featured'].profiles.length}})</h4>
+				<div class="col-md-12 col-sm-12 col-xs-12 prof-slider">
+					<img class="btn" src="images/nav-left.png"
+						ng-click="upc.scrollProfileList(false, 'featured-user-list')"><img
+						class="btn" src="images/nav-right.png"
+						ng-click="upc.scrollProfileList(true, 'featured-user-list')">
+				</div>
+				<div class="user-list featured-user-list">
+					<div id="featured{{$index}}"
+						ng-repeat="prof in upc.currentUserProfileInfo['featured'].profiles"
+						style="height: 175px;">
+						<a href="#member-info" style="display: block"
+							ng-click="upc.setCurrentMember(prof.memberId)"
+							ng-init="showOver=false"
+							ng-mouseover="showOver=true;upc.setPositionOfHover($event)"
+							ng-mouseout="showOver=false"> <img class="prof-upload-image"
+							ng-if="prof.img.length>0" ng-src="{{prof.img[prof.imgIdx].url}}">
+							<img ng-if="prof.img.length===0" src="images/female-user.png">
+							<h5>{{prof.name}}</h5>{{prof.age}} yrs, {{prof.height}} cm <label
+							ng-show="showOver" class="member-popover"
+							style="top: 60px !important"> <img
+								src="images/pop-over.png">
+								<table class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+									<tr>
+										<td class="col-lg-6 col-md-6 col-sm-6 col-xs-6">Member-Id</td>
+										<td class="col-lg-6 col-md-6 col-sm-6 col-xs-6">{{prof.memberId}}</td>
+									</tr>
+									<tr>
+										<td class="col-lg-6 col-md-6 col-sm-6 col-xs-6">Marital
+											Status</td>
+										<td class="col-lg-6 col-md-6 col-sm-6 col-xs-6">{{prof.married}}</td>
+									</tr>
+									<!--	<tr>
+										<td class="col-lg-6 col-md-6 col-sm-6 col-xs-6">Star</td>
+										<td class="col-lg-6 col-md-6 col-sm-6 col-xs-6">{{prof.horoscope.star}}</td>
+									</tr>
+									<tr>
+										<td class="col-lg-6 col-md-6 col-sm-6 col-xs-6">Raasi</td>
+										<td class="col-lg-6 col-md-6 col-sm-6 col-xs-6">{{prof.horoscope.raasi}}</td>
+									</tr>-->
+									<tr>
+										<td class="col-lg-6 col-md-6 col-sm-6 col-xs-6">Caste</td>
+										<td class="col-lg-6 col-md-6 col-sm-6 col-xs-6">{{prof.caste}}</td>
+									</tr>
+								</table>
+						</label></a>
+					</div>
+					<div
+						ng-if="upc.currentUserProfileInfo['featured'].profiles.length>0">
+						<button
+							ng-if="!upc.showFeaturedLoader && !upc.featuredEndText && upc.currentUserProfileInfo['featured'].profiles.length>5"
+							class="btn load-more" ng-click="upc.getMoreFeaturedProf()">Load
+							More</button>
+						<span ng-if="upc.showFeaturedLoader"
+							class="inner-loader glyphicon glyphicon-repeat glyphicon-repeat-animate"></span>
+						<br> <br>
+						<div
+							ng-if="upc.featuredEndText || (upc.currentUserProfileInfo['featured'].profiles.length>0&&upc.currentUserProfileInfo['featured'].profiles.length<=5)"
+							style="font-size: 13px; color: orange; margin-top: 65px;">
+						</div>
+					</div>
+					<!--<label class="not-found"
+						ng-if="upc.$rootScope.homeRedirect && upc.currentUserProfileInfo['featured'].profiles.length===0">
+						Sorry!.. No Matching Profiles Found Yet</label> <label class="not-found"
+						ng-if="!upc.$rootScope.homeRedirect">Please <a
+						href="#profile/edit">update</a> All Your Details To View Members
+					</label>-->
+
+				</div>
+			</div>
+			<div class="user-result">
+				<h4 class="header">{{upc.currentUserProfileInfo["bestMatches"].title}}
+					({{upc.currentUserProfileInfo['bestMatches'].profiles.length}})</h4>
+				<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 prof-slider">
+					<img class="btn" src="images/nav-left.png"
+						ng-click="upc.scrollProfileList(false, 'bm-user-list')"><img
+						class="btn" src="images/nav-right.png"
+						ng-click="upc.scrollProfileList(true, 'bm-user-list')">
+				</div>
+				<div class="user-list bm-user-list">
+					<div
+						ng-repeat="prof in upc.currentUserProfileInfo['bestMacthes'].profiles">
+						<a href="#member-info" stlye="display:block"
+							ng-click="upc.setCurrentMember(prof.memberId)"> <img
+							class="prof-upload-image" ng-if="prof.img.length>0"
+							ng-src="{{prof.img[prof.imgIdx].url}}"> <img
+							ng-if="prof.img.length===0" src="images/female-user.png">
+							<h5>{{prof.name}}</h5>{{prof.age}}, {{prof.height}}
+						</a>
+					</div>
+					<div id="bestMacthes{{$index}}"
+						ng-repeat="prof in upc.currentUserProfileInfo['bestMatches'].profiles"
+						style="height: 175px;">
+						<a href="#member-info" stlye="display:block"
+							ng-click="upc.setCurrentMember(prof.memberId)"
+							ng-init="showOver=false"
+							ng-mouseover="showOver=true;upc.setPositionOfHover($event)"
+							ng-mouseout="showOver=false"> <img class="prof-upload-image"
+							ng-if="prof.img.length>0" ng-src="{{prof.img[prof.imgIdx].url}}">
+							<img ng-if="prof.img.length===0" src="images/female-user.png">
+							<h5>{{prof.name}}</h5>{{prof.age}} yrs, {{prof.height}} cm <label
+							ng-show="showOver" class="member-popover"
+							style="top: 310px !important"> <img
+								src="images/pop-over.png">
+								<table class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+									<tr>
+										<td class="col-lg-6 col-md-6 col-sm-6 col-xs-6">Member-Id</td>
+										<td class="col-lg-6 col-md-6 col-sm-6 col-xs-6">{{prof.memberId}}</td>
+									</tr>
+									<tr>
+										<td class="col-lg-6 col-md-6 col-sm-6 col-xs-6">Marital
+											Status</td>
+										<td class="col-lg-6 col-md-6 col-sm-6 col-xs-6">{{prof.married}}</td>
+									</tr>
+									<!--	<tr>
+										<td class="col-lg-6 col-md-6 col-sm-6 col-xs-6">Star</td>
+										<td class="col-lg-6 col-md-6 col-sm-6 col-xs-6">{{prof.horoscope.star}}</td>
+									</tr>
+									<tr>
+										<td class="col-lg-6 col-md-6 col-sm-6 col-xs-6">Raasi</td>
+										<td class="col-lg-6 col-md-6 col-sm-6 col-xs-6">{{prof.horoscope.raasi}}</td>
+									</tr>-->
+									<tr>
+										<td class="col-lg-6 col-md-6 col-sm-6 col-xs-6">Caste</td>
+										<td class="col-lg-6 col-md-6 col-sm-6 col-xs-6">{{prof.caste}}</td>
+									</tr>
+								</table>
+						</label></a>
+					</div>
+					<div
+						ng-if="upc.currentUserProfileInfo['bestMatches'].profiles.length>0">
+						<button
+							ng-if="!upc.shownBestMatchLoader && !upc.bestMatchEndText && upc.currentUserProfileInfo['bestMatches'].profiles.length>5"
+							class="btn load-more" ng-click="upc.getMoreBMProf()">LoadMore</button>
+						<span ng-if="upc.shownBestMatchLoader"
+							class="inner-loader glyphicon glyphicon-repeat glyphicon-repeat-animate"></span>
+						<div
+							ng-if="upc.bestMatchEndText || (upc.currentUserProfileInfo['bestMatches'].profiles.length>0&&upc.currentUserProfileInfo['bestMatches'].profiles.length<=5)"
+							style="font-size: 13px; color: orange; margin-top: 65px;">
+						</div>
+					</div>
+					<!--<label class="not-found"
+						ng-if="upc.$rootScope.homeRedirect && upc.currentUserProfileInfo['bestMatches'].profiles.length===0">Sorry!..
+						No Matching Profiles Found Yet</label> <label class="not-found"
+						ng-if="!upc.$rootScope.homeRedirect">Please <a
+						href="#profile/edit">Update</a> All Your Details To View Members
+					</label>-->
+				</div>
+			</div>
+			<div class="user-result">
+				<h4 class="header">Members Shortlisted Your Profile
+					({{upc.currentUserProfileInfo['shortLisetedYou'].profiles.length}})</h4>
+				<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 prof-slider">
+					<img class="btn" src="images/nav-left.png"
+						ng-click="upc.scrollProfileList(false, 'ms-user-list')"><img
+						class="btn" src="images/nav-right.png"
+						ng-click="upc.scrollProfileList(true, 'ms-user-list')">
+				</div>
+				<div class="user-list ms-user-list">
+					<div
+						ng-repeat="prof in upc.currentUserProfileInfo['recentVisitors'].profiles">
+						<a href="#member-info" stlye="display:block"
+							ng-click="upc.setCurrentMember(prof.memberId)"> <img
+							class="prof-upload-image" ng-if="prof.img.length>0"
+							ng-src="{{prof.img[prof.imgIdx].url}}"> <img
+							ng-if="prof.img.length===0" src="images/female-user.png">
+							<h5>{{prof.name}}</h5>{{prof.age}}, {{prof.height}}
+						</a>
+					</div>
+					<!--	<label class="not-found" ng-if="upc.currentUserProfileInfo['featured'].profiles.length===0">Sorry!.. No Matching Profiles found yet<span ng-if="!upc.$rootScope.homeRedirect">(Please <a href="#profile/edit">update</a> all your details to view members)</span></label> -->
+					<div id="sly{{$index}}"
+						ng-repeat="prof in upc.currentUserProfileInfo['shortLisetedYou'].profiles"
+						style="height: 175px;">
+						<a href="#member-info" stlye="display:block"
+							ng-click="upc.setCurrentMember(prof.memberId)"
+							ng-init="showOver=false"
+							ng-mouseover="showOver=true;upc.setPositionOfHover($event)"
+							ng-mouseout="showOver=false"> <img class="prof-upload-image"
+							ng-if="prof.img.length>0" ng-src="{{prof.img[prof.imgIdx].url}}">
+							<img ng-if="prof.img.length===0" src="images/female-user.png">
+							<h5>{{prof.name}}</h5>{{prof.age}} yrs, {{prof.height}} cm <label
+							ng-show="showOver" class="member-popover"
+							style="top: 555px !important"> <img
+								src="images/pop-over.png">
+								<table class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+									<tr>
+										<td class="col-lg-6 col-md-6 col-sm-6 col-xs-6">Member-Id</td>
+										<td class="col-lg-6 col-md-6 col-sm-6 col-xs-6">{{prof.memberId}}</td>
+									</tr>
+									<tr>
+										<td class="col-lg-6 col-md-6 col-sm-6 col-xs-6">Marital
+											Status</td>
+										<td class="col-lg-6 col-md-6 col-sm-6 col-xs-6">{{prof.married}}</td>
+									</tr>
+									<!--	<tr>
+										<td class="col-lg-6 col-md-6 col-sm-6 col-xs-6">Star</td>
+										<td class="col-lg-6 col-md-6 col-sm-6 col-xs-6">{{prof.horoscope.star}}</td>
+									</tr>
+									<tr>
+										<td class="col-lg-6 col-md-6 col-sm-6 col-xs-6">Raasi</td>
+										<td class="col-lg-6 col-md-6 col-sm-6 col-xs-6">{{prof.horoscope.raasi}}</td>
+									</tr>-->
+									<tr>
+										<td class="col-lg-6 col-md-6 col-sm-6 col-xs-6">Caste</td>
+										<td class="col-lg-6 col-md-6 col-sm-6 col-xs-6">{{prof.caste}}</td>
+									</tr>
+								</table>
+						 </label>
+						</a>
+					</div>
+					<div
+						ng-if="upc.currentUserProfileInfo['shortLisetedYou'].profiles.length>0">
+						<button
+							ng-if="!upc.shownShortListLoader && !upc.shortListedEndText && upc.currentUserProfileInfo['shortLisetedYou'].profiles.length>5"
+							class="btn load-more" ng-click="upc.getMoreShortListedProf()">LoadMore</button>
+						<span ng-if="upc.shownShortListLoader"
+							class="inner-loader glyphicon glyphicon-repeat glyphicon-repeat-animate"></span>
+						<div
+							ng-if="upc.shortListedEndText || (upc.currentUserProfileInfo['shortLisetedYou'].profiles.length>0&&upc.currentUserProfileInfo['shortLisetedYou'].profiles.length<=5)"
+							style="font-size: 13px; color: orange; margin-top: 65px;"></div>
+					</div>
+					<!--	<div
+							ng-if="upc.shortListedEndText || (upc.currentUserProfileInfo['shortLisetedYou'].profiles.length>0&&upc.currentUserProfileInfo['shortLisetedYou'].profiles.length<=5)"
+							style="font-size: 13px; color: orange; margin-top: 65px;">Thats
+							all Folks!! ..</div>
+					</div>-->
+					<!--<label class="not-found"
+						ng-if="upc.$rootScope.homeRedirect&&upc.currentUserProfileInfo['shortLisetedYou'].profiles.length===0">Sorry!..
+						No Members Shortlisted Your Profile Yet</label> <label class="not-found"
+						ng-if="!upc.$rootScope.homeRedirect">Please <a
+						href="#profile/edit">Update</a> All Your Details To View Members
+					</label>-->
+				</div>
+			</div>
+			<div class="user-result">
+				<h4 class="header">Members Shortlisted By You
+					({{upc.currentUserProfileInfo['shortLisetedByYou'].profiles.length}})</h4>
+				<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 prof-slider">
+					<img class="btn" src="images/nav-left.png"
+						ng-click="upc.scrollProfileList(false, 'sm-user-list')"><img
+						class="btn" src="images/nav-right.png"
+						ng-click="upc.scrollProfileList(true, 'sm-user-list')">
+				</div>
+				<div class="user-list sm-user-list">
+					<div
+						ng-repeat="prof in upc.currentUserProfileInfo['recentVisitors'].profiles">
+						<a href="#member-info" stlye="display:block"
+							ng-click="upc.setCurrentMember(prof.memberId)"> <img
+							class="prof-upload-image" ng-if="prof.img.length>0"
+							ng-src="{{prof.img[prof.imgIdx].url}}"> <img
+							ng-if="prof.img.length===0" src="images/female-user.png">
+							<h5>{{prof.name}}</h5>{{prof.age}}, {{prof.height}}
+						</a>
+					</div>
+					<!--	<label class="not-found" ng-if="upc.currentUserProfileInfo['shortLisetedByYou'].profiles.length===0">Sorry!.. No Matching Profiles found yet<span ng-if="!upc.$rootScope.homeRedirect">(Please <a href="#profile/edit">update</a> all your details to view members)</span></label>		 -->
+					<div id="slby{{$index}}"
+						ng-repeat="prof in upc.currentUserProfileInfo['shortLisetedByYou'].profiles"
+						style="height: 175px;">
+						<a href="#member-info" stlye="display:block"
+							ng-click="upc.setCurrentMember(prof.memberId)"
+							ng-init="showOver=false"
+							ng-mouseover="showOver=true;upc.setPositionOfHover($event)"
+							ng-mouseout="showOver=false"> <img class="prof-upload-image"
+							ng-if="prof.img.length>0" ng-src="{{prof.img[prof.imgIdx].url}}">
+							<img ng-if="prof.img.length===0" src="images/female-user.png">
+							<h5>{{prof.name}}</h5>{{prof.age}} yrs, {{prof.height}} cm <label
+							ng-show="showOver" class="member-popover"
+							style="top: 815px !important"> <img
+								src="images/pop-over.png">
+								<table class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+									<tr>
+										<td class="col-lg-6 col-md-6 col-sm-6 col-xs-6">Member-Id</td>
+										<td class="col-lg-6 col-md-6 col-sm-6 col-xs-6">{{prof.memberId}}</td>
+									</tr>
+									<tr>
+										<td class="col-lg-6 col-md-6 col-sm-6 col-xs-6">Marital
+											Status</td>
+										<td class="col-lg-6 col-md-6 col-sm-6 col-xs-6">{{prof.married}}</td>
+									</tr>
+									<!--	<tr>
+										<td class="col-lg-6 col-md-6 col-sm-6 col-xs-6">Star</td>
+										<td class="col-lg-6 col-md-6 col-sm-6 col-xs-6">{{prof.horoscope.star}}</td>
+									</tr>
+									<tr>
+										<td class="col-lg-6 col-md-6 col-sm-6 col-xs-6">Raasi</td>
+										<td class="col-lg-6 col-md-6 col-sm-6 col-xs-6">{{prof.horoscope.raasi}}</td>
+									</tr>-->
+									<tr>
+										<td class="col-lg-6 col-md-6 col-sm-6 col-xs-6">Caste</td>
+										<td class="col-lg-6 col-md-6 col-sm-6 col-xs-6">{{prof.caste}}</td>
+									</tr>
+								</table>
+						</label></a>
+					</div>
+					<div
+						ng-if="upc.currentUserProfileInfo['shortLisetedByYou'].profiles.length>0">
+						<button
+							ng-if="!upc.shownShortListYLoader && !upc.shortListedYEndText && upc.currentUserProfileInfo['shortLisetedByYou'].profiles.length>5"
+							class="btn load-more" ng-click="upc.getMoreShortListedYProf()">Load
+							More</button>
+						<span ng-if="upc.shownShortListYLoader"
+							class="inner-loader glyphicon glyphicon-repeat glyphicon-repeat-animate"></span>
+						<div
+							ng-if="upc.shortListedYEndText || (upc.currentUserProfileInfo['shortLisetedByYou'].profiles.length>0 && upc.currentUserProfileInfo['shortLisetedByYou'].profiles.length<=5)"
+							style="font-size: 13px; color: orange; margin-top: 65px;">
+						</div>
+					</div>
+					<!--<label class="not-found"
+						ng-if="upc.$rootScope.homeRedirect && upc.currentUserProfileInfo['shortLisetedByYou'].profiles.length===0">No
+						Profiles Shortlisted By You Yet</label> <label class="not-found"
+						ng-if="!upc.$rootScope.homeRedirect">Please <a
+						href="#profile/edit">Update</a> All Your Details To View Members
+					</label>-->
+				</div>
+			</div>
+			<div class="user-result" ng-if="false">
+				<h4 class="header">{{upc.currentUserProfileInfo["newMatches"].title}}
+					({{upc.currentUserProfileInfo['newMatches'].profiles.length}})</h4>
+				<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 prof-slider">
+					<img class="btn" src="images/nav-left.png"
+						ng-click="upc.scrollProfileList(false, 'nm-user-list')"><img
+						class="btn" src="images/nav-right.png"
+						ng-click="upc.scrollProfileList(true, 'nm-user-list')">
+				</div>
+				<div class="user-list nm-user-list">
+					<div
+						ng-repeat="prof in upc.currentUserProfileInfo['newMatches'].profiles">
+						<a href="#member-info" stlye="display:block"
+							ng-click="upc.setCurrentMember(prof.memberId)"> <img
+							class="prof-upload-image" ng-if="prof.img.length>0"
+							ng-src="{{prof.img[prof.imgIdx].url}}"> <img
+							ng-if="prof.img.length===0" src="images/female-user.png">
+							<h5>{{prof.name}}</h5>{{prof.age}}, {{prof.height}}
+						</a>
+					</div>
+					<label class="not-found"
+						ng-if="upc.currentUserProfileInfo['newMatches'].profiles.length===0">Sorry!..
+						No Matching Profiles found yet<span
+						ng-if="!upc.$rootScope.homeRedirect">(Please <a
+							href="#profile/edit">update</a> all your details to view members)
+					</span>
+					</label>
+				</div>
+			</div>
+			<div class="user-result" ng-if="false">
+				<h4 class="header">{{upc.currentUserProfileInfo["recentVisitors"].title}}
+					({{upc.currentUserProfileInfo['recentVisitors'].profiles.length}})</h4>
+				<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 prof-slider">
+					<img class="btn" src="images/nav-left.png"
+						ng-click="upc.scrollProfileList(false, 'rv-user-list')"><img
+						class="btn" src="images/nav-right.png"
+						ng-click="upc.scrollProfileList(true, 'rv-user-list')">
+				</div>
+				<div class="user-list rv-user-list">
+					<div
+						ng-repeat="prof in upc.currentUserProfileInfo['recentVisitors'].profiles">
+						<a href="#member-info" stlye="display:block"
+							ng-click="upc.setCurrentMember(prof.memberId)"> <img
+							class="prof-upload-image" ng-if="prof.img.length>0"
+							ng-src="{{prof.img[prof.imgIdx].url}}"> <img
+							ng-if="prof.img.length===0" src="images/female-user.png">
+							<h5>{{prof.name}}</h5>{{prof.age}}, {{prof.height}}
+						</a>
+					</div>
+					<label class="not-found"
+						ng-if="upc.currentUserProfileInfo['recentVisitors'].profiles.length===0">Sorry!..
+						No Matching Profiles found yet<span
+						ng-if="!upc.$rootScope.homeRedirect">(Please <a
+							href="#profile/edit">update</a> all your details to view members)
+					</span>
+					</label>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="col-lg-2 col-md-2 col-sm-2 col-xs-2 ad-banner">
+		<img src="images/app-ad.png"><br> <a href="#memberShip"><img
+			src="images/ad-banner-2.png"></a>
+	</div>
+</div>
+<div ng-include src="'views/footer.html'"></div>
+
+<style type="text/css">
+.not-found {
+	padding: 48px;
+	color: orange;
+	margin-top: 25px;
+	font-size: 13px;
+	font-weight: normal;
+}
+
+.glyphicon-repeat-animate {
+	-webkit-animation: spin .7s infinite linear;
+	font-size: 45px;
+	color: orange;
+	margin-top: 50px;
+	background: rgba(255, 165, 0, 0.24);
+	border-radius: 137px;
+}
+
+@
+-webkit-keyframes spin {from { -webkit-transform:rotate(0deg);
+	
+}
+
+to {
+	-webkit-transform: rotate(360deg);
+}
+
+}
+.laoder-container {
+	position: absolute;
+	width: 100%;
+	left: 0px;
+	z-index: 1;
+	top: 190px;
+}
+
+.prof-upload-image {
+	margin-top: 0px !important;
+	width: 115px !important;
+	height: 110px !important;
+}
+
+.load-more {
+	background: linear-gradient(orange, #ffbe46);
+	color: #fff;
+	margin-top: 50px;
+}
+
+.inner-loader {
+	margin-top: 60px;
+	font-size: 25px;
+}
+</style>
