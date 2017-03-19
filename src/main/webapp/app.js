@@ -206,6 +206,7 @@ function MainAppCtrl($http, $scope, $rootScope, loggedUserService, $location, $t
       else{
         $location.path("/");}
     });
+    this.gyrShowMenu= false;
 }
 
 MainAppCtrl.prototype = {

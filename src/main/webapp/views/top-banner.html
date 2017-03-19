@@ -23,7 +23,7 @@
 	</div>-->
 	<!--<div class="col-lg-3 col-md-3 col-sm-6 col-xs-4 visible-xs app-download" >-->
 	<div
-		class="col-lg-3 col-md-2 col-sm-2 col-xs-2  visible-md visible-sm visible-xs app-download">
+		class="col-lg-3 col-md-2 col-sm-2 col-xs-2 app-download">
 
 		<h6 ng-show="true">App</h6>
 		<img ng-show="true" src="images/download.png" style="cursor: pointer"
@@ -39,7 +39,7 @@
 		<a ng-show="true" href="#search" type="submit" ng-if="mc.isProfile" ><img src="images/search.png"></a>
 	</div>-->
 	<div ng-init="mc.showSupprtPO=false"
-		class="col-lg-4 col-md-3 col-sm-6 col-xs-6 visible-lg top-banner-menu">
+		class=" visible-lg visible-md visible-sm top-banner-menu">
 		<a data-toggle="modal" ng-click="mc.isLogged=true"
 			data-target="#login-modal" ng-if="!mc.isProfile"><img
 			src="images/login.png">
@@ -60,12 +60,12 @@
 
 	</div>
 	<div
-		class="col-lg-3 col-md-2 col-sm-2 col-xs-2  visible-md visible-sm visible-xs top-banner-menu">
-		<h6 ng-show="true">Menu</h6>
+		class="visible-xs top-banner-menu">
+		<h6 ng-show="true"></h6>
 		<img ng-show="true" src="images/menu.png"
 			style="cursor: pointer; text-align: center;"
-			ng-click="hc.showMenu=!hc.showMenu;hc.showDownload=false">
-		<ul ng-show="true" ng-if="hc.showMenu">
+			ng-click="mc.gyrShowMenu=true;hc.showMenu=true;hc.showDownload=false;">
+		<ul ng-show="true" ng-if="hc.gyrShowMenu">
 
 			<!--<li><a href=""><img src="images/login.png"></a>
 				<h5>Login</h5></li>
@@ -138,6 +138,82 @@
 					<h5 ng-show="true" ng-class="(isNav5)? 'active':''">Shortlists</h5></a></li>
 		</ul>
 	</div>
+	<div class="menu-navbar">
+		<div class="close-menu"><a ng-click="mc.gyrShowMenu=false;">&#10006;</a></div>
+		<ul ng-show="true" ng-if="hc.showMenu">
+
+			<!--<li><a href=""><img src="images/login.png"></a>
+				<h5>Login</h5></li>
+			<li><a href=""><img src="images/support.png"></a>
+				<h5>Support</h5></li>
+			<li><a href=""><img src="images/settings.png"></a>
+				<h5>Service</h5></li>-->
+
+			<!--Login-->
+			<li><a data-toggle="modal" ng-click="mc.isLogged=true;mc.gyrShowMenu=false;"
+				data-target="#login-modal" ng-if="!mc.isProfile"><img
+					src="images/login.png">
+					<h5 ng-if="!mc.isProfile">Login</h5></a></li>
+
+			<!--Home-->
+			<li><a href="#profile" ng-if="mc.isProfile"
+				ng-class="(isNav1)? 'active':''"
+				ng-click="isNav1=true;isNav2=false;isNav3=false;isNav4=false;isNav5=false;mc.$rootScope.activeNav='';mc.scrollToTop()"><img
+					src="images/home.png">
+					<h5 ng-show="true" ng-class="(isNav1)? 'active':''">Home</h5></a></li>
+
+			<!--Support-->
+			<li><a href="" ng-mouseover="mc.showSupprtPO=true"
+				ng-mouseout="mc.showSupprtPO=false"><img
+					src="images/support.png">
+					<h5>Support</h5></a>
+				<div ng-if="mc.showSupprtPO" class="sup-ex">
+					<label> +91-9500630242 <br> +91-7200141323 <br>
+						Mail : admin@indiazbridal.com
+					</label>
+				</div></li>
+
+			<!--Inbox-->
+			<li><a href="#inbox" ng-if="mc.isProfile"
+				ng-click="isNav1=true;isNav2=true;isNav3=false;isNav4=false;isNav5=false;mc.$rootScope.activeNav='Inbox > Invitations';mc.scrollToTop()"><img
+					src="images/inbox.png">
+					<h5 ng-show="true" ng-class="(isNav2)? 'active':''">Inbox</h5></a></li>
+
+			<!--Service-->
+			<li><a href=""><img src="images/settings.png">
+					<h5>Service</h5></li>
+			</a>
+
+			<!--Matches-->
+			<li><a href="" ng-if="mc.isProfile"
+				ng-click="isNav1=true;isNav2=false;isNav3=false;isNav4=true;isNav5=false;mc.$rootScope.activeNav='Matches';mc.scrollToTop()"><img
+					src="images/hearts.png">
+					<h5 ng-show="true" ng-class="(isNav4)? 'active':''">Matches</h5></a></li>
+
+			<!--Hi, Admin-->
+			<li><a ng-show="true" href="#profile" ng-if="mc.isProfile"><img
+					src="images/user.png">
+					<h5 ng-show="true" ng-if="mc.isProfile">Hi, Admin</h5></a></li>
+
+			<!--Profiles-->
+			<li><a href="#search" ng-if="mc.isProfile"
+				ng-click="isNav1=true;isNav2=false;isNav3=true;isNav4=false;isNav5=false;mc.$rootScope.activeNav='Search';mc.scrollToTop()"><img
+					src="images/search.png">
+					<h5 ng-show="true" ng-class="(isNav3)? 'active':''">Profiles</h5></a></li>
+
+			<!--Logout-->
+			<li><a ng-show="true" ng-click="mc.clearCache()" href="#"
+				ng-if="mc.isProfile"><img src="images/logout.png">
+					<h5 ng-show="true" ng-if="mc.isProfile">Logout</h5></a></li>
+
+			<!--Short-listed Profile-->
+			<li><a href="" ng-if="mc.isProfile"
+				ng-click="isNav1=true;isNav2=false;isNav3=false;isNav4=false;isNav5=true;mc.$rootScope.activeNav='Shortlists';mc.scrollToTop()"><img
+					src="images/shortList.png">
+					<h5 ng-show="true" ng-class="(isNav5)? 'active':''">Shortlists</h5></a></li>
+		</ul>
+	 </div>
+	<div class="menu-overlay" ng-click=" mc.gyrShowMenu=false;"> </div>
 	<div
 		ng-if="(mc.isProfile&&!mc.isFooter&&mc.isLogged) || mc.$rootScope.showSubBar"
 		class="profile-nav col-lg-12"

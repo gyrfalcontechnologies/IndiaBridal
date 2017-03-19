@@ -1,6 +1,5 @@
 html {
 	overflow-x: hidden;
-
 }
 
 html, body {
@@ -132,13 +131,14 @@ html, body {
 	.better-half-search .search-options .search-category input,
 	.better-half-search .search-options .search-category select {
 	border: 1px solid rgba(27, 26, 26, 0.19);
-	border-radius: 10px;
 	padding: 5px 5px;
 	font-size: 12px;
 	height: 31px;
 	margin: 6px 0px;
 	outline: none;
 	background: whitesmoke;
+	border-bottom: 2px solid #fcad34;
+	padding-left: 8px;
 }
 
 .form-header {
@@ -1393,6 +1393,7 @@ tab-content {
 #login-modal .modal-dialog {
 	top: 110px;
 	width: 25%;
+	min-width: 300px;
 }
 
 .member-content .modal-content {
@@ -2234,7 +2235,7 @@ tab-content {
 				width: 70px;
 			}
 			.portfolio span {
-				font-size: 14px !important;
+				font-size: 14px ;
 			}
 		}
 	}
@@ -2255,7 +2256,77 @@ tab-content {
 .nav-options{
 		display: none;
 	}
+.reg-form input{
+	border-radius:0px;
+}
+.my-carousal, .site-wrapper{
+transition: .5s;
+}
+.sub-nav .my-carousal,.sub-nav{
+		margin-left: 250px;
+	}
+.sub-nav .menu-navbar{
+	width:250px;
+}
+.sub-nav .menu-overlay{
+	width: 100%;
+    opacity: 0.8;
+}
+.menu-navbar ul li img{
+	width: 30px;
+}
+.menu-navbar ul li h5{
+	display: inline;
+    color: #fff;
+    padding-left: 10px;
+}
 
+.menu-navbar ul li{
+padding: 10px 0;
+}
+
+.menu-navbar{
+    height: 100%;
+    width: 0;
+    top: 0;
+    left: 0;
+    background-color: #111;
+    position: fixed;
+    z-index: 20;
+    overflow-x: hidden;
+    transition: .5s;
+    padding-top: 10px;
+}
+.menu-overlay{
+    height: 100%;
+    width: 0;
+    position: fixed;
+    z-index: 19;
+    top: 0;
+    left: 0;
+    background-color: rgba(0,0,0, 0.9);
+    overflow-y: auto;
+    overflow-x: hidden;
+    text-align: center;
+    opacity: 0;
+    transition: opacity 1s;
+}
+
+.menu-navbar .close-menu{
+	display: block;
+    width: 250px;
+}
+
+.menu-navbar .close-menu a{
+	float: right;
+    margin-right: 15px;
+    font-size: 20px;
+    color: #fff;
+}
+.menu-navbar .close-menu a:hover, .menu-navbar .close-menu a:focus{
+	text-decoration:none;
+}
+.app-download{display:none;}
 /* responsive for mobile devices*/
 @media (min-width:280px) and (max-width : 350px){
 	.better-half-search .search-options{
@@ -2289,6 +2360,22 @@ tab-content {
 		width:100%;
 	}
 	
+	.portfolio img{
+		width: 50px;
+	}
+	
+	.portfolio span, .portfolio div span {
+				font-size: 11px;
+			}
+	.about .portfolio{
+		height:180px !important;
+	}
+	.accept span{
+		color: #000;
+    font-size: 11px;
+	}
+	
+	
 }
 
 @media (min-width:481px) and (max-width : 767px){
@@ -2305,6 +2392,7 @@ tab-content {
 		width:100%;
 	}
 	
+
 }
 
 @media (min-width:768px) and (max-width : 1024px){
@@ -2321,6 +2409,11 @@ tab-content {
 	.footer-col{
 		width:33%;
 	}
+	.top-banner-menu {
+		float: right;
+	}
+	
+	
 	
 }
 
@@ -2337,6 +2430,9 @@ tab-content {
 	
 	.footer-col{
 		width:33%;
+	}
+	.top-banner-menu {
+		float: right;
 	}
 }
 

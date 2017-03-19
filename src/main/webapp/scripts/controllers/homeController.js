@@ -90,6 +90,9 @@ HomeController.prototype = {
         }
       }); 
     },
+    gyrShowMenu : function(){
+  	  alert('success');
+    },
     minTopBanner : function(event){
       var scrollDiff = (event.originalEvent)? event.originalEvent.currentTarget.scrollY : 0; 
       $(".top-banner-view").addClass("animate-height");

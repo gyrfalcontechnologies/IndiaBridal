@@ -60,104 +60,105 @@ function myFunction() {
 </script>
 </head>
 <body ng-app="IndiaBridal" ng-controller="mainAppCtrl as mc">
-	<div class="social-panel">
-		<img src="images/footer-link-img1.png"><br> <img
-			src="images/footer-link-img2.png"><br> <img
-			src="images/footer-link-img3.png"><br> <img
-			src="images/footer-link-img4.png"><br> <img
-			src="images/footer-link-img5.png"><br>
-		<button id="panel-collapse" ng-click="mc.toggleSocial()">&laquo;</button>
-	</div>
-	<!-- <div class="chat-list"> -->
-	<div class="top-banner-view" ng-include src="'views/top-banner.html'"></div>
-	<div class="app-view">
-		<div class="partials" ng-view></div>
-	</div>
-	<div ng-show="true" class="chat"
-		ng-if="mc.isProfile&&!mc.isFooter&&mc.isLogged">
-		<div class="chat-header" ng-click="mc.toggleChat()">Chat with
-			Members ({{mc.currentUserProfileInfo["members-available"].length}})</div>
-		<div class="chat-list">
-			<div
-				ng-repeat="mem in mc.currentUserProfileInfo['members-available']"
-				class="users">
-				<div style="float: left">
-					<img src="images/female-user.png">&emsp;{{mem.name}}
+	<div class="site-wrapper ng-class: {'sub-nav': mc.gyrShowMenu};"  id="siteWrapper">	
+		<div class="social-panel">
+			<img src="images/footer-link-img1.png"><br> <img
+				src="images/footer-link-img2.png"><br> <img
+				src="images/footer-link-img3.png"><br> <img
+				src="images/footer-link-img4.png"><br> <img
+				src="images/footer-link-img5.png"><br>
+			<button id="panel-collapse" ng-click="mc.toggleSocial()">&laquo;</button>
+		</div>
+		<!-- <div class="chat-list"> -->
+		<div class="top-banner-view" ng-include src="'views/top-banner.html'"></div>
+		<div class="app-view">
+			<div class="partials" ng-view></div>
+		</div>
+		<div ng-show="true" class="chat"
+			ng-if="mc.isProfile&&!mc.isFooter&&mc.isLogged">
+			<div class="chat-header" ng-click="mc.toggleChat()">Chat with
+				Members ({{mc.currentUserProfileInfo["members-available"].length}})</div>
+			<div class="chat-list">
+				<div
+					ng-repeat="mem in mc.currentUserProfileInfo['members-available']"
+					class="users">
+					<div style="float: left">
+						<img src="images/female-user.png">&emsp;{{mem.name}}
+					</div>
+					<div style="float: right">
+						<div ng-class="mem.isOnline? 'member-online':'member-offline'"></div>
+					</div>
 				</div>
-				<div style="float: right">
-					<div ng-class="mem.isOnline? 'member-online':'member-offline'"></div>
+			</div>
+		</div>
+		<div ng-show="true" class="admin-chat"
+			ng-if="mc.isProfile&&!mc.isFooter&&mc.isLogged">
+			<div class="admin-chat-header" ng-click="mc.toggleAdminChat()">We
+				Are Here To Help You</div>
+			<div class="chat-list"></div>
+		</div>
+	
+	
+		<div id="login-modal" class="modal fade" role="dialog">
+			<div class="modal-dialog">
+				<div class="modal-content">
+					<div class="modal-body">
+						<form id="login-form" ng-submit="mc.logUser()">
+							<table class="login-table">
+								<tr>
+									<td><img src="images/logo-login.png"></td>
+								</tr>
+								<tr>
+									<td><h2>Login</h2></td>
+								</tr>
+								<tr>
+									<td><input ng-model="mc.uName" type="text"
+										placeholder="Username" required></td>
+								</tr>
+								<tr>
+									<td><input ng-model="mc.pwd" type="password"
+										placeholder="Password" maxlength="10" required></td>
+								</tr>
+	
+	
+								<tr>
+									<td><button class="btn" type="submit">Login</button>
+										<button class="btn" type="reset"
+											onclick="window.location = 'index.html' " onclick="something">Cancel</button>
+										<!--	<button class="btn" type="button" data-dismiss="modal" > Cancel </button></td></tr>     -->
+								<tr ng-if="!mc.isAuthProcessed">
+									<td style="color: #fff">Authentication in Progress...<span
+										class="glyphicon glyphicon-repeat glyphicon-repeat-custom"></span></td>
+								</tr>
+								<tr>
+									<td><span><a href="" onclick="myFunction()">Forget
+												Password?</a></span></td>
+								</tr>
+								<!----- <tr ng-init="mc.isLogged=true" ng-if="!mc.isLogged="><td style="color:white">*Invalid Username / Password &emsp; <a href="">Forgot Password?</a></td></tr>--->
+								<tr>
+									<td><span>Not a Member?</span>&emsp;<span><a
+											href="#">Sign Up</a></span></td>
+								</tr>
+	
+							</table>
+						</form>
+					</div>
+				</div>
+			</div>
+		</div>
+	
+		<div id="reg-succs-modal" class="modal fade" role="dialog">
+			<div class="modal-dialog" style="margin-top: 20% !important;">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal">&times;</button>
+				</div>
+				<div class="modal-content"
+					style="background: rgba(220, 215, 146, 0.93) !important;">
+					<div class="modal-body">{{mc.$rootScope.registrStatus}}</div>
 				</div>
 			</div>
 		</div>
 	</div>
-	<div ng-show="true" class="admin-chat"
-		ng-if="mc.isProfile&&!mc.isFooter&&mc.isLogged">
-		<div class="admin-chat-header" ng-click="mc.toggleAdminChat()">We
-			Are Here To Help You</div>
-		<div class="chat-list"></div>
-	</div>
-
-
-	<div id="login-modal" class="modal fade" role="dialog">
-		<div class="modal-dialog">
-			<div class="modal-content">
-				<div class="modal-body">
-					<form id="login-form" ng-submit="mc.logUser()">
-						<table class="login-table">
-							<tr>
-								<td><img src="images/logo-login.png"></td>
-							</tr>
-							<tr>
-								<td><h2>Login</h2></td>
-							</tr>
-							<tr>
-								<td><input ng-model="mc.uName" type="text"
-									placeholder="Username" required></td>
-							</tr>
-							<tr>
-								<td><input ng-model="mc.pwd" type="password"
-									placeholder="Password" maxlength="10" required></td>
-							</tr>
-
-
-							<tr>
-								<td><button class="btn" type="submit">Login</button>
-									<button class="btn" type="reset"
-										onclick="window.location = 'index.html' " onclick="something">Cancel</button>
-									<!--	<button class="btn" type="button" data-dismiss="modal" > Cancel </button></td></tr>     -->
-							<tr ng-if="!mc.isAuthProcessed">
-								<td style="color: #fff">Authentication in Progress...<span
-									class="glyphicon glyphicon-repeat glyphicon-repeat-custom"></span></td>
-							</tr>
-							<tr>
-								<td><span><a href="" onclick="myFunction()">Forget
-											Password?</a></span></td>
-							</tr>
-							<!----- <tr ng-init="mc.isLogged=true" ng-if="!mc.isLogged="><td style="color:white">*Invalid Username / Password &emsp; <a href="">Forgot Password?</a></td></tr>--->
-							<tr>
-								<td><span>Not a Member?</span>&emsp;<span><a
-										href="#">Sign Up</a></span></td>
-							</tr>
-
-						</table>
-					</form>
-				</div>
-			</div>
-		</div>
-	</div>
-
-	<div id="reg-succs-modal" class="modal fade" role="dialog">
-		<div class="modal-dialog" style="margin-top: 20% !important;">
-			<div class="modal-header">
-				<button type="button" class="close" data-dismiss="modal">&times;</button>
-			</div>
-			<div class="modal-content"
-				style="background: rgba(220, 215, 146, 0.93) !important;">
-				<div class="modal-body">{{mc.$rootScope.registrStatus}}</div>
-			</div>
-		</div>
-	</div>
-
 
 	<!-- <div class="footer-view" ng-include src="'views/footer.html'"></div> -->
 </body>
