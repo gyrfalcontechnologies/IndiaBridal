@@ -78,7 +78,7 @@
 						</font> <font ng-if="upc.$rootScope.activeNav==='Inbox > Request Sent'">To
 						</font>
 					</label>:&emsp;&emsp;&emsp;{{upc.currentMsgItem.name}} (<a
-						href="#member-info" stlye="display:block"
+						href="#member-info" style="display:block"
 						ng-click="upc.setCurrentMember(upc.currentMsgItem.displayId)">{{upc.currentMsgItem.displayId}})</a><br>
 						<label> <font
 							ng-if="upc.$rootScope.activeNav==='Inbox > Invitations'">Subject
@@ -192,7 +192,7 @@
 				<div class="user-list bm-user-list">
 					<div
 						ng-repeat="prof in upc.currentUserProfileInfo['bestMacthes'].profiles">
-						<a href="#member-info" stlye="display:block"
+						<a href="#member-info" style="display:block"
 							ng-click="upc.setCurrentMember(prof.memberId)"> <img
 							class="prof-upload-image" ng-if="prof.img.length>0"
 							ng-src="{{prof.img[prof.imgIdx].url}}"> <img
@@ -203,7 +203,7 @@
 					<div id="bestMacthes{{$index}}"
 						ng-repeat="prof in upc.currentUserProfileInfo['bestMatches'].profiles"
 						style="height: 175px;">
-						<a href="#member-info" stlye="display:block"
+						<a href="#member-info" style="display:block"
 							ng-click="upc.setCurrentMember(prof.memberId)"
 							ng-init="showOver=false"
 							ng-mouseover="showOver=true;upc.setPositionOfHover($event)"
@@ -271,7 +271,7 @@
 				<div class="user-list ms-user-list">
 					<div
 						ng-repeat="prof in upc.currentUserProfileInfo['recentVisitors'].profiles">
-						<a href="#member-info" stlye="display:block"
+						<a href="#member-info" style="display:block"
 							ng-click="upc.setCurrentMember(prof.memberId)"> <img
 							class="prof-upload-image" ng-if="prof.img.length>0"
 							ng-src="{{prof.img[prof.imgIdx].url}}"> <img
@@ -283,7 +283,7 @@
 					<div id="sly{{$index}}"
 						ng-repeat="prof in upc.currentUserProfileInfo['shortLisetedYou'].profiles"
 						style="height: 175px;">
-						<a href="#member-info" stlye="display:block"
+						<a href="#member-info" style="display:block"
 							ng-click="upc.setCurrentMember(prof.memberId)"
 							ng-init="showOver=false"
 							ng-mouseover="showOver=true;upc.setPositionOfHover($event)"
@@ -356,7 +356,7 @@
 				<div class="user-list sm-user-list">
 					<div
 						ng-repeat="prof in upc.currentUserProfileInfo['recentVisitors'].profiles">
-						<a href="#member-info" stlye="display:block"
+						<a href="#member-info" style="display:block"
 							ng-click="upc.setCurrentMember(prof.memberId)"> <img
 							class="prof-upload-image" ng-if="prof.img.length>0"
 							ng-src="{{prof.img[prof.imgIdx].url}}"> <img
@@ -368,7 +368,7 @@
 					<div id="slby{{$index}}"
 						ng-repeat="prof in upc.currentUserProfileInfo['shortLisetedByYou'].profiles"
 						style="height: 175px;">
-						<a href="#member-info" stlye="display:block"
+						<a href="#member-info" style="display:block"
 							ng-click="upc.setCurrentMember(prof.memberId)"
 							ng-init="showOver=false"
 							ng-mouseover="showOver=true;upc.setPositionOfHover($event)"
@@ -437,7 +437,7 @@
 				<div class="user-list nm-user-list">
 					<div
 						ng-repeat="prof in upc.currentUserProfileInfo['newMatches'].profiles">
-						<a href="#member-info" stlye="display:block"
+						<a href="#member-info" style="display:block"
 							ng-click="upc.setCurrentMember(prof.memberId)"> <img
 							class="prof-upload-image" ng-if="prof.img.length>0"
 							ng-src="{{prof.img[prof.imgIdx].url}}"> <img
@@ -466,7 +466,7 @@
 				<div class="user-list rv-user-list">
 					<div
 						ng-repeat="prof in upc.currentUserProfileInfo['recentVisitors'].profiles">
-						<a href="#member-info" stlye="display:block"
+						<a href="#member-info" style="display:block"
 							ng-click="upc.setCurrentMember(prof.memberId)"> <img
 							class="prof-upload-image" ng-if="prof.img.length>0"
 							ng-src="{{prof.img[prof.imgIdx].url}}"> <img
